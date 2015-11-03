@@ -124,10 +124,12 @@
     <Content Include="Assets\add_image.png" />
     <Content Include="Assets\alm.png" />
     <Content Include="Assets\calendar.png" />
+    <Content Include="Assets\comment.png" />
     <Content Include="Assets\found.png" />
     <Content Include="Assets\Hawaiio.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\lost.png" />
+    <Content Include="Assets\options.png" />
     <Content Include="Assets\sad.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
