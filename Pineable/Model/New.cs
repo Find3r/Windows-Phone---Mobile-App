@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,5 +32,14 @@ namespace Pineable.Model
         public string Latitude { get; set; }
 
         public string Longitude { get; set; }
+
+        public string DateShort
+        {
+            get
+            {
+
+                return DateLost.ToString("dd-MM-yyyy", new CultureInfo("es-ES"));
+            }
+        }
     }
 }

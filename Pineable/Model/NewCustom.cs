@@ -18,5 +18,44 @@ namespace Pineable.Model
 
         public bool StatusFollow { get; set; }
 
+
+        public string StatusPictureURL
+        {
+            get
+            {
+                switch (IdStatus)
+                {
+                    case "0":
+                        return "ms-appx:///Assets/lost.png";
+
+                    case "1":
+                        return "ms-appx:///Assets/found.png";
+
+                    default:
+                        return "";
+                }
+
+            }
+        }
+
+        public string StatusName
+        {
+            get
+            {
+
+                switch (IdStatus)
+                {
+                    case "0":
+                        return "Desaparecido(a)";
+
+                    case "1":
+                        return "Encontrado(a)";
+
+                    default:
+                        return "";
+                }
+            }
+        }
+
     }
 }

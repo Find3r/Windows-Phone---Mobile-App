@@ -80,16 +80,7 @@ namespace Pineable
 
             string descripcion = "Bacon ipsum dolor amet swine ham hock drumstick tail. Meatloaf jowl andouille jerky salami pork belly alcatra frankfurter prosciutto kevin.Tongue corned beef kielbasa salami t-bone, rump shoulder meatball pork loin cupim. Andouille ham flank pork shankle ham hock short loin rump salami tenderloin biltong." +
 
-"Frankfurter andouille biltong ball tip filet mignon, sirloin turducken swine t-bone shank pork chop pastrami. Shoulder porchetta tenderloin brisket, beef ribs turkey ham pork flank alcatra ground round. Doner meatball kevin swine t - bone cupim picanha. Strip steak filet mignon ribeye, fatback pig rump pancetta. Chicken capicola drumstick doner rump tail frankfurter jowl turducken swine pastrami sausage t - bone alcatra.Capicola short loin biltong picanha doner hamburger shoulder jerky meatloaf short ribs. Boudin pork belly alcatra strip steak salami ball tip ham hock pork chop drumstick sirloin t-bone." +
-
- "  Andouille pork frankfurter filet mignon brisket hamburger spare ribs strip steak jerky drumstick meatball tri-tip shank alcatra sirloin.Shoulder prosciutto ham hock t - bone tri - tip alcatra doner cow ham porchetta boudin. Tail jerky shank strip steak chicken doner pork chop.Shank prosciutto pork belly bacon shoulder. Chuck bacon sausage, ham pork belly porchetta pork chop sirloin landjaeger." +
-
-"Meatball tenderloin kevin alcatra frankfurter.Pancetta tongue boudin hamburger. Kielbasa turducken ham doner prosciutto, pork chop ground round pancetta rump short ribs frankfurter.Swine filet mignon capicola, t-bone ground round jerky porchetta fatback ribeye. Brisket strip steak tongue flank meatball pork chop. Biltong capicola ribeye kevin tenderloin bacon jerky strip steak.Tri - tip meatball short loin cow." +
-
-"Jerky meatloaf rump sausage, ground round t-bone pastrami beef picanha alcatra doner andouille spare ribs. Venison shank ham spare ribs pork loin beef ribs drumstick flank.Prosciutto ground round salami andouille shankle pork belly, pig hamburger swine sirloin.Pastrami biltong pork belly beef ribs. Andouille kielbasa alcatra rump brisket pork, bresaola ribeye hamburger cupim salami." +
-
-"Short loin pig meatball cow venison, frankfurter tail turkey salami pastrami biltong bacon brisket picanha. Pork boudin porchetta jerky salami.Chuck sausage corned beef biltong turducken turkey.Meatloaf strip steak shank jerky turkey swine, sausage spare ribs shankle. Jowl boudin kevin, flank meatball tenderloin ham.";
-
+"Frankfurter andouille biltong ball tip filet mignon, sirloin turducken swine t-bone shank pork chop pastrami. Shoulder porchetta tenderloin brisket, beef ribs turkey ham pork flank alcatra ground round. Doner meatball kevin swine t - bone cupim picanha. Strip steak filet mignon ribeye, fatback pig rump pancetta. Chicken capicola drumstick doner rump tail frankfurter jowl turducken swine pastrami sausage t - bone alcatra.Capicola short loin biltong picanha doner hamburger shoulder jerky meatloaf short ribs. Boudin pork belly alcatra strip steak salami ball tip ham hock pork chop drumstick sirloin t-bone.";
 
             descripcion += descripcion;
 
@@ -107,7 +98,7 @@ namespace Pineable
                     estado = 1;
                 }
 
-                lstNoticias.Add(new NewCustom() { Id = "1", PictureURL = "ms-appx:///Assets/alm.png", Description = descripcion,  DateLost = DateTime.Now, IdCategory = "1", IdStatus = estado.ToString(), IdZone = "1", IdUser = "1", Name = "Noticia " + i.ToString() });
+                lstNoticias.Add(new NewCustom() { Id = "1", PictureURL = "ms-appx:///Assets/alm.png", Description = descripcion, DateLost = DateTime.Now, IdCategory = "1", IdStatus = estado.ToString(), IdZone = "1", IdUser = "1", Name = "Noticia " + i.ToString(), NameZone = "Puriscal", QuantityComments = i, UserName = i.ToString(),UserPictureURL = "ms-appx:///Assets/user.png" });
 
             }
 

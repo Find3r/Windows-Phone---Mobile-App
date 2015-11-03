@@ -47,7 +47,7 @@
                     <ListView
                         Name="lstvUltimasNoticias"
                         IsItemClickEnabled="True"
-                        ItemTemplate="{StaticResource itemNoticia}"
+                        ItemTemplate="{StaticResource itemNoticiaCompleta}"
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="lstvUltimasNoticias_ItemClick">
 
                     </ListView>
