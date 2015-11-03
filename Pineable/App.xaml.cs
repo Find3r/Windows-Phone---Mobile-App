@@ -8,6 +8,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,6 +29,7 @@ namespace Pineable
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
+        public static bool NetworkAvailable = true;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -36,6 +39,33 @@ namespace Pineable
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+        }
+
+        private void NetworkInformation_NetworkStatusChanged(object sender)
+        {
+            if (NetworkInformation.GetInternetConnectionProfile() == null)
+                NetworkAvailable = false;
+            else
+                NetworkAvailable = true;
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            Frame frame = Window.Current.Content as Frame;
+            if (frame == null)
+            {
+                return;
+            }
+
+            if (frame.CanGoBack)
+            {
+                frame.GoBack();
+                e.Handled = true;
+            }
         }
 
         /// <summary>

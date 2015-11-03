@@ -16,7 +16,7 @@ namespace Pineable.Model
 
         public string PictureURL { get; set; }
 
-        public string DateLost { get; set; }
+        public DateTime DateLost { get; set; }
 
         public string IdUser { get; set; }
 

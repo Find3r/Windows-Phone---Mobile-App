@@ -4,4 +4,297 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pineable">
 
+    <Application.Resources>
+
+        <DataTemplate x:Key="itemNoticia">
+
+            <Grid 
+                    Name="grid" 
+                    Margin="5" 
+                    Height="Auto" 
+                    Background="#fff" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                        Grid.Row="0"
+                        Foreground="#FF8000"
+                        Text="{Binding Name}" 
+                        FontWeight="Bold"
+                        Height="Auto"
+                        Padding="10"
+                        TextWrapping="Wrap"
+                        FontSize="16"/>
+
+                <Image 
+                        Grid.Row="1"
+                        Height="200" 
+                        Source="{Binding PictureURL}" 
+                        Stretch="Fill"/>
+
+                <TextBlock 
+                        Grid.Row="2"
+                        Width="Auto" 
+                        Padding="10"
+                        Height="Auto"
+                        TextWrapping="Wrap"
+                        Foreground="#5F4C0B"
+                        >
+                    <Run Text="Fecha: "  FontSize="16" />
+                    <Run Text="{Binding DateLost}" FontSize="14"/>
+                </TextBlock>
+
+
+
+                <Grid Grid.Row="3" Margin="10">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image 
+                            Grid.Column="0" 
+                            x:Name="imgvEstado" 
+                            Source="{Binding UrlImagenEstado}" 
+                            Width="50" 
+                            Height="50"  
+                            VerticalAlignment="Center"/>
+
+                    <TextBlock
+                            Grid.Column="1" 
+                            x:Name="txtvEstado" 
+                            Text="{Binding NombreEstado}"
+                            FontSize="12" 
+                            Foreground="#5F4C0B"  
+                            VerticalAlignment="Center" />
+
+                    <Image 
+                            Grid.Column="2"  
+                            Source="ms-appx:///Assets/support.png"
+                            Width="50" 
+                            Height="50"  
+                            VerticalAlignment="Center"/>
+
+                    <TextBlock 
+                            Grid.Column="3"  
+                            Text="Ayudar"  
+                            Foreground="#5F4C0B" 
+                            FontSize="12"  
+                            VerticalAlignment="Center" />
+
+                </Grid>
+
+
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="itemListaRecientes">
+
+            <Border 
+                Width="Auto" 
+                Height="Auto" 
+                Margin="5"
+                Background="#fff">
+
+                <Grid Height="Auto" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image 
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Height="75" 
+                        Width="100" 
+                        Source="{Binding UrlImagen}" 
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Stretch="Fill"
+                        Margin="10,10,10,10"/>
+
+
+
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="1">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock 
+                            Grid.Row="0"
+                            Text="{Binding Fecha}" 
+                            Width="Auto" 
+                            Height="Auto"
+                            TextWrapping="Wrap"
+                            Foreground="#5F4C0B"
+                            FontSize="14" 
+                            Margin="0,0,10,0"
+                            HorizontalAlignment="Right"/>
+
+                        <TextBlock 
+                            Grid.Row="1"
+                            Foreground="#FF8000"
+                            Text="{Binding Nombre}" 
+                            FontWeight="Bold"
+                            Width="300" 
+                            Height="Auto"
+                            TextWrapping="Wrap"
+                            FontSize="16"/>
+
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" x:Name="imgvEstado" Source="{Binding UrlImagenEstado}" Width="50" Height="50"  VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" x:Name="txtvEstado" Text="{Binding NombreEstado}" FontSize="12" Foreground="#5F4C0B"   VerticalAlignment="Center" />
+                        <Image Grid.Column="2"  Source="ms-appx:///Assets/support.png" Width="50" Height="50"  VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="3"  Text="Ayudar"  Foreground="#5F4C0B" FontSize="12"  VerticalAlignment="Center" />
+                    </Grid>
+
+
+                </Grid>
+
+
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="List_HorizontalCards">
+
+            <Grid Height="120" Margin="0,0,0,10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding UrlImagen}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Grid Grid.Column="1">
+                    <Rectangle Width="900" Height="0"/>
+                    <Grid Margin="16,5,16,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"  Text="{Binding Nombre}" MaxLines="2"/>
+                        <TextBlock Grid.Row="1" Margin="0,5,0,0"  Text="{Binding Fecha}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </DataTemplate>
+
+        <DataTemplate x:Name="itemListaAreas">
+            <Grid HorizontalAlignment="Center" Height="170" Width="170" Background="#055f87"  Margin="5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"  />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image
+                    Grid.Row="0"
+                    Width="100"
+                    Height="100"
+                    Source="{Binding UrlImagen}" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    TextAlignment="Center"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    TextWrapping="Wrap"
+                    Padding="5"
+                    FontSize="16"
+                    Text="{Binding Nombre}" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate
+             x:Name="itemComentario">
+            <Grid 
+                Margin="5"
+                Height="Auto" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="60" 
+                    Width="60" 
+                    Source="{Binding UrlImagen}" 
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0,0,10,0"
+                    Stretch="Fill"/>
+
+                <StackPanel
+                    Orientation="Vertical"                    
+                    Grid.Row="0"
+                    Grid.Column="1">
+
+                    <TextBlock                 
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontSize="14" 
+                        FontWeight="Bold"
+                        HorizontalAlignment="Left">
+                    
+                        <Run Text="{Binding NombreUsuario}"  />
+                        <Run Text="{Binding ApellidosUsuario}" />
+
+                    </TextBlock>
+
+                    <TextBlock 
+                        Text="{Binding Descripcion}" 
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontSize="14" 
+                        HorizontalAlignment="Left" />
+
+                </StackPanel>
+
+
+            </Grid>
+        </DataTemplate>
+
+
+    </Application.Resources>
+
 </Application>

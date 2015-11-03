@@ -35,6 +35,6 @@ namespace Pineable.Model
         public string CoverPicture { get; set; }
 
         //[JsonProperty("idpais")]
-        public string IdPais { get; set; }
+        public string IdCountry { get; set; }
     }
 }

@@ -19,87 +19,186 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid>
-        <Pivot x:Uid="Pivot" Title="MY APPLICATION" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
+    <Grid
+        Background="#e8e8e8">
+        <Pivot x:Uid="Pivot" Foreground="#ff80a51e" Title="App" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding}" Foreground="#ff80a51e"/>
+                    </Grid>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
             <!--Pivot item one-->
             <PivotItem
                 x:Uid="PivotItem1"
-                Margin="19,14.5,0,0"
-                Header="first"
-                DataContext="{Binding FirstGroup}"
-                d:DataContext="{Binding Groups[0], Source={d:DesignData Source=/DataModel/SampleData.json, Type=data:SampleDataSource}}"
+                Margin="19,14.5,19,0"
+                Header="Reciente"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
                 <!--Double line list with text wrapping-->
-                <ListView
-                    ItemsSource="{Binding Items}"
-                    IsItemClickEnabled="True"
-                    ItemClick="ItemView_ItemClick"
-                    ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,9.5">
-                                <TextBlock
-                                    Text="{Binding Title}"
-                                    TextWrapping="Wrap"
-                                    Pivot.SlideInAnimationGroup="1"
-                                    CommonNavigationTransitionInfo.IsStaggerElement="True"
-                                    Style="{ThemeResource ListViewItemTextBlockStyle}"
-                                    Margin="0,0,19,0"/>
-                                <TextBlock
-                                    Text="{Binding Description}"
-                                    TextWrapping="WrapWholeWords"
-                                    Pivot.SlideInAnimationGroup="2" 
-                                    CommonNavigationTransitionInfo.IsStaggerElement="True" 
-                                    Style="{ThemeResource ListViewItemContentTextBlockStyle}"
-                                    Margin="0,0,19,0"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView
+                        Name="lstvUltimasNoticias"
+                        IsItemClickEnabled="True"
+                        ItemTemplate="{StaticResource itemNoticia}"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="lstvUltimasNoticias_ItemClick">
+
+                    </ListView>
+                </Grid>
             </PivotItem>
 
             <!--Pivot item two-->
             <PivotItem
                 x:Uid="PivotItem2"
-                Margin="19,14.5,0,0"
-                Header="second"
-                DataContext="{Binding SecondGroup}"
-                d:DataContext="{Binding Groups[1], Source={d:DesignData Source=/DataModel/SampleData.json, Type=data:SampleDataSource}}">
+                Margin="19,14.5,19,0"
+                Header="Seguimiento"
+                CommonNavigationTransitionInfo.IsStaggerElement="True">
+                <!--Double line list with text wrapping-->
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView
+                        Name="lstvMisNoticias"
+                        IsItemClickEnabled="True"
+                        ItemTemplate="{StaticResource itemNoticia}"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="lstvUltimasNoticias_ItemClick">
+
+                    </ListView>
+
+                    <TextBlock 
+                            Grid.Row="0" 
+                            Name="txtMiSeguimiento" 
+                            TextWrapping="Wrap" 
+                            TextAlignment="Center"
+                            Margin="0,15,0,0"
+                            FontSize="25"
+                            Foreground="#5F4C0B"/>
+
+
+
+                </Grid>
+            </PivotItem>
+
+            <!--Pivot item three-->
+            <PivotItem
+                x:Uid="PivotItem3"
+                Header="Mi Perfil"
+                Margin="19,14.5,19,0">
                 <!--Double line list no text wrapping-->
-                <ListView
-                    ItemsSource="{Binding Items}"
-                    IsItemClickEnabled="True"
-                    ItemClick="ItemView_ItemClick"
-                    Loaded="SecondPivot_Loaded"
-                    ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,9.5">
-                                <TextBlock
-                                    Text="{Binding Title}"
-                                    Pivot.SlideInAnimationGroup="1"
-                                    CommonNavigationTransitionInfo.IsStaggerElement="True"
-                                    Style="{StaticResource ListViewItemTextBlockStyle}"/>
-                                <TextBlock
-                                    Text="{Binding Description}"
-                                    Pivot.SlideInAnimationGroup="2"
-                                    CommonNavigationTransitionInfo.IsStaggerElement="True"
-                                    Style="{StaticResource ListViewItemContentTextBlockStyle}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+
+                <ScrollViewer 
+                    Background="#e8e8e8"
+                    x:Name="ContentRoot">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid
+                            Name="grdPerfil"
+                            Background="#f8f8f8"
+                            Grid.Row="0"
+                             Margin="5"
+                            >
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Ellipse
+                                Margin="0,20,0,0"
+                            Grid.Row="0"
+                            Height="100" 
+                            Width="100"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                               >
+                                <Ellipse.Fill>
+                                    <ImageBrush 
+                                    x:Name="imgvPerfilUsuario"
+                                    ImageSource="ms-appx:///Assets/user.png" 
+                                    AlignmentX="Center" 
+                                    AlignmentY="Center" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+
+
+                            <TextBlock
+                            Grid.Row="1"
+                            TextAlignment="Center"
+                            Text="Nombre Usuario"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#f7931e"
+                            Name="txtNombreUsuario" />
+
+                            <TextBlock
+                            Grid.Row="2"
+                            TextAlignment="Center"
+                            Margin="0,5,0,0"
+                            Text="Dirección Usuario"
+                             Foreground="#5F4C0B"
+                            Name="txtDireccionUsuario" />
+                        </Grid>
+
+
+
+                        <ListView
+                            Name="lstvUserPosts"
+                            Grid.Row="1"
+                            ItemTemplate="{StaticResource itemNoticia}"
+                            IsItemClickEnabled="True"
+                            ItemClick="lstvUserPosts_ItemClick"/>
+
+                        <TextBlock 
+                            Grid.Row="1" 
+                            Name="txtComentarios" 
+                            TextWrapping="Wrap" 
+                            TextAlignment="Center"
+                            Margin="0,15,0,0"
+                            FontSize="25"
+                            Foreground="#5F4C0B"/>
+
+                    </Grid>
+
+
+
+                </ScrollViewer>
+
+
             </PivotItem>
         </Pivot>
+
+        <ProgressRing 
+            Name="progressRing" 
+            Background="Transparent" 
+            Foreground="#f7931e"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center"/>
     </Grid>
 
-    <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton x:Uid="AddAppBarButton" x:Name="AddAppBarButton" Label="add" Icon="Add" Click="AddAppBarButton_Click" />
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="SecondaryButton1" x:Name="SecondaryButton1" Label="secondary command 1" />
-                <AppBarButton x:Uid="SecondaryButton2" x:Name="SecondaryButton2" Label="secondary command 2" />
-            </CommandBar.SecondaryCommands>
+    <Page.BottomAppBar >
+        <CommandBar Background="#ff80a51e">
+            <!--<AppBarButton x:Name="btnAddPost" Label="Agregar" Icon="Message" Click="btnAddPost_Click" />-->
+
+            <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
+
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
