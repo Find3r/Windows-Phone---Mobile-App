@@ -106,7 +106,15 @@ namespace Pineable
             txtNombreUsuario.Text = objUsuarioLogueado.Name;
             txtDireccionUsuario.Text = "Costa Rica";
 
-            lstvMisNoticias.ItemsSource = lstNoticias;
+            List<Category> lstCategorias = new List<Category>();
+            for (int i = 0; i < 5; i++)
+            {
+                lstCategorias.Add(new Category() { Id = i.ToString(), Name = i.ToString(), PictureURL = "ms-appx:///Assets/car.png" });
+            }
+
+            grdvAreas.ItemsSource = lstCategorias;
+
+            //lstvMisNoticias.ItemsSource = lstNoticias;
 
             if (lstNoticias.Count == 0)
             {

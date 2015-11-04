@@ -26,6 +26,7 @@
                 <DataTemplate>
                     <Grid>
                         <TextBlock Text="{Binding}" Foreground="#ff80a51e"/>
+                        <Image Width="50" Height="50" />
                     </Grid>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
@@ -36,6 +37,9 @@
                 Margin="19,14.5,19,0"
                 Header="Reciente"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
+                
+                
+                
                 <!--Double line list with text wrapping-->
                 <Grid>
                     <Grid.RowDefinitions >
@@ -68,6 +72,12 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    
+                    <GridView
+                        Name="grdvAreas"
+                        ItemTemplate="{StaticResource itemListaAreas}" />
+                        
+                        <!--
                     <ListView
                         Name="lstvMisNoticias"
                         IsItemClickEnabled="True"
@@ -75,6 +85,8 @@
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="lstvUltimasNoticias_ItemClick">
 
                     </ListView>
+                        
+                        -->
 
                     <TextBlock 
                             Grid.Row="0" 

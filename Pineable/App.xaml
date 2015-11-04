@@ -417,7 +417,7 @@
         </DataTemplate>
 
         <DataTemplate x:Name="itemListaAreas">
-            <Grid HorizontalAlignment="Center" Height="170" Width="170" Background="#055f87"  Margin="5" >
+            <Grid HorizontalAlignment="Center" Height="170" Width="170" Background="#ff80a51e"  Margin="5" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"  />
@@ -431,7 +431,7 @@
                     Grid.Row="0"
                     Width="100"
                     Height="100"
-                    Source="{Binding UrlImagen}" />
+                    Source="{Binding PictureURL}" />
 
                 <TextBlock
                     Grid.Row="1"
@@ -441,7 +441,7 @@
                     TextWrapping="Wrap"
                     Padding="5"
                     FontSize="16"
-                    Text="{Binding Nombre}" />
+                    Text="{Binding Name}" />
             </Grid>
         </DataTemplate>
 
