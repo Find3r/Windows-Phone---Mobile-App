@@ -134,35 +134,42 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    
+                    
 
                     <Image 
                             Grid.Column="0" 
                             Source="{Binding StatusPictureURL}" 
                             Width="40" 
-                            Height="40"  />
+                            Height="40" 
+                        HorizontalAlignment="Left"/>
 
                     <TextBlock
                             Grid.Column="1" 
                             Text="{Binding StatusName}"
                             FontSize="18" 
                             Foreground="#5F4C0B"  
+                        HorizontalAlignment="Left"
                             VerticalAlignment="Center" />
 
                     <Image 
-                            Grid.Column="2"  
+                            Grid.Column="3"  
                             Source="ms-appx:///Assets/comment.png"
                             Width="40" 
                             Height="40"  
+                        HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                         />
 
                     <TextBlock 
-                            Grid.Column="3"  
+                            Grid.Column="4"  
                             Text="{Binding QuantityComments}"  
                             Foreground="#5F4C0B" 
                             FontSize="18"  
+                         HorizontalAlignment="Right"
                             VerticalAlignment="Center" />
 
                 </Grid>
