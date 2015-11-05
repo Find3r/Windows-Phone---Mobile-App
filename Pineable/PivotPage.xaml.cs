@@ -114,6 +114,16 @@ namespace Pineable
 
             grdvAreas.ItemsSource = lstCategorias;
 
+            // notificaciones
+            List<UserNotification> lstNotifications = new List<UserNotification>();
+
+            for (int i = 0; i < 15; i++)
+            {
+                lstNotifications.Add(new UserNotification() { Id = i.ToString(), DateCreated = DateTime.Now, IdNew = i.ToString(), IdUser = i.ToString(), StatusRead = false, Description = "Texto " + i.ToString() });
+            }
+            lstvNotificaciones.ItemsSource = lstNotifications;
+
+
             //lstvMisNoticias.ItemsSource = lstNoticias;
 
             if (lstNoticias.Count == 0)

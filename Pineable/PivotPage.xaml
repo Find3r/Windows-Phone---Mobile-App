@@ -102,9 +102,34 @@
                 </Grid>
             </PivotItem>
 
-            <!--Pivot item three-->
+            <!--Pivot item two-->
             <PivotItem
                 x:Uid="PivotItem3"
+                Margin="19,14.5,19,0"
+                Header="Notificaciones"
+                CommonNavigationTransitionInfo.IsStaggerElement="True">
+                <!--Double line list with text wrapping-->
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                   
+                   
+                    <ListView
+                        Name="lstvNotificaciones"
+                        IsItemClickEnabled="True"
+                        ItemTemplate="{StaticResource itemNotificacion}" />
+
+                </Grid>
+            </PivotItem>
+
+            <!--Pivot item three-->
+            <PivotItem
+                x:Uid="PivotItem4"
                 Header="Mi Perfil"
                 Margin="19,14.5,19,0">
                 <!--Double line list no text wrapping-->

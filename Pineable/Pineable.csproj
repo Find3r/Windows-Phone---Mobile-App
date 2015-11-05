@@ -132,6 +132,7 @@
     <Content Include="Assets\lost.png" />
     <Content Include="Assets\options.png" />
     <Content Include="Assets\sad.png" />
+    <Content Include="Assets\siren.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
