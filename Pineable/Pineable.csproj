@@ -80,11 +80,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Page Include="ItemPage.xaml">
+    <Page Include="View\ItemPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PivotPage.xaml">
+    <Page Include="View\PivotPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,7 +98,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
-    <Compile Include="ItemPage.xaml.cs">
+    <Compile Include="View\ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Category.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserNotification.cs" />
-    <Compile Include="PivotPage.xaml.cs">
+    <Compile Include="View\PivotPage.xaml.cs">
       <DependentUpon>PivotPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

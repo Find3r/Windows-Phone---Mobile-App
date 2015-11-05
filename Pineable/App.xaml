@@ -506,7 +506,8 @@
 
             <Grid 
                 Height="Auto"
-                Margin="0,10">
+                Margin="0,10"
+                Background="White">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
