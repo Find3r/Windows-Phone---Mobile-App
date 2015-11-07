@@ -38,7 +38,8 @@
             <ScrollViewer 
                 Grid.Row="0"
                 Grid.RowSpan="2"
-                ZoomMode="Enabled">
+                ZoomMode="Enabled"
+                >
                
           
 
@@ -46,7 +47,7 @@
                 Name="imgvNew"
                
                 Source="ms-appx:///Assets/alm.png" 
-                Stretch="Fill"
+                Stretch="Uniform"
                 />
 
             </ScrollViewer>

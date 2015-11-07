@@ -178,5 +178,7 @@ namespace Pineable.View
                 throw new Exception("Failed to create initial page");
             }
         }
+
+ 
     }
 }

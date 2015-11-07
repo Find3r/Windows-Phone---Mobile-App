@@ -44,7 +44,7 @@ namespace Pineable
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
-        private async void verificarConexion()
+        private  void verificarConexion()
         {
             cargarDatosOffline();
 
