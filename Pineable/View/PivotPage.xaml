@@ -19,6 +19,21 @@
         </TransitionCollection>
     </Page.Transitions>
 
+    <!-- Declare the shared flyout as a resource. -->
+    <Page.Resources>
+        
+        <MenuFlyout x:Key="menu">
+
+            <MenuFlyoutItem Text="Reportar" Background="White" Foreground="Black" Click="ReportNew" />
+
+            <MenuFlyoutItem Text="Editar" Background="White" Foreground="Black" Click="EditNew"  />
+
+            <MenuFlyoutItem Text="Cancelar" Background="White" Foreground="Black"/>
+
+        </MenuFlyout>
+
+    </Page.Resources>
+
     <Grid
         Background="#e8e8e8">
 
@@ -84,11 +99,11 @@
                                             <Ellipse
                                                Grid.Row="0"
                                                Grid.Column="0"
-                                               Height="50" 
-                                               Width="50"
+                                               Height="30" 
+                                               Width="30"
                                                VerticalAlignment="Top"
                                                HorizontalAlignment="Left"
-                                               Margin="10">     
+                                                Margin="0,0,0,10">     
 
                                                 <Ellipse.Fill>
                                                     <ImageBrush 
@@ -111,11 +126,14 @@
                                         <Image
                                             Grid.Row="0"
                                             Grid.Column="2"
-                                            Width="40"
-                                            Height="40"
+                                            Width="30"
+                                            Height="30"
                                             Source="ms-appx:///Assets/options.png"
                                             HorizontalAlignment="Right" 
-                                            />
+                                            Margin="0,0,-15,0" 
+                                            Tapped="OptionsNew" 
+                                            FlyoutBase.AttachedFlyout="{StaticResource menu}"/>
+
 
                                         <Image
                                             Grid.Row="1"
@@ -145,7 +163,8 @@
                                             Grid.ColumnSpan="2"
                                             VerticalAlignment="Center"
                                             Foreground="#212121"
-                                            FontSize="18"/>
+                                            FontSize="18"
+                                            Margin="5"/>
 
                                         <TextBlock
                                             Grid.Row="4"
@@ -384,14 +403,21 @@
             Foreground="#f7931e"
             VerticalAlignment="Center" 
             HorizontalAlignment="Center"/>
-        
+
+      
+
     </Grid>
 
-    <Page.BottomAppBar >
-        <CommandBar Background="#ff80a51e">
-            <!--<AppBarButton x:Name="btnAddPost" Label="Agregar" Icon="Message" Click="btnAddPost_Click" />-->
+    <Page.BottomAppBar  >
+        <CommandBar 
+            x:Name="commandBar"
+            Background="#ff80a51e" 
+            >
 
+            <CommandBar.PrimaryCommands>
+           
             <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
+            </CommandBar.PrimaryCommands>
 
         </CommandBar>
     </Page.BottomAppBar>

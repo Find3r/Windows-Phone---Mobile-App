@@ -12,6 +12,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,6 +27,7 @@ namespace Pineable
 {
     public sealed partial class PivotPage : Page
     {
+        
         User objUsuarioLogueado;
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -309,5 +311,23 @@ namespace Pineable
             }
         }
 
+        private async void OptionsNew(object sender, TappedRoutedEventArgs e)
+        {
+
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+
+
+        }
+
+
+        private void ReportNew(object sender, RoutedEventArgs e)
+        {
+            var a = objNoticiaAux;
+        }
+
+        private void EditNew(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

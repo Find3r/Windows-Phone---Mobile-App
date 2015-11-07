@@ -46,7 +46,7 @@
             <Image
                 Name="imgvNew"            
                 Source="ms-appx:///Assets/alm.png" 
-                Stretch="None" 
+                Stretch="Uniform" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
                 />
