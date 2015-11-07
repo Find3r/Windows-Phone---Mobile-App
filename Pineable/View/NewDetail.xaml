@@ -35,13 +35,21 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Image
-                Name="imgvNew"
+            <ScrollViewer 
                 Grid.Row="0"
                 Grid.RowSpan="2"
+                ZoomMode="Enabled">
+               
+          
+
+            <Image
+                Name="imgvNew"
+               
                 Source="ms-appx:///Assets/alm.png" 
                 Stretch="Fill"
                 />
+
+            </ScrollViewer>
 
             <Grid
                 Grid.Row="1"
