@@ -16,7 +16,7 @@ namespace Pineable.Model
 
         public string IdNew { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public string Hour { get; set; }
 

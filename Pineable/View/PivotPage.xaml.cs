@@ -31,6 +31,8 @@ namespace Pineable
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
+        NewCustom objNoticiaAux;
+
         public PivotPage()
         {
             this.InitializeComponent();
@@ -268,6 +270,9 @@ namespace Pineable
         private void lstvUltimasNoticias_ItemClick(object sender, ItemClickEventArgs e)
         {
 
+            objNoticiaAux = e.ClickedItem as NewCustom;
+   
+
         }
 
         private void lstvUserPosts_ItemClick(object sender, ItemClickEventArgs e)
@@ -279,5 +284,30 @@ namespace Pineable
         {
 
         }
+
+        private void AddCommentNew(object sender, TappedRoutedEventArgs e)
+        {
+            if (objNoticiaAux != null)
+            {
+
+                if (!this.Frame.Navigate(typeof(View.Comments), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+        }
+
+        private void NavigateNewDetail(object sender, TappedRoutedEventArgs e)
+        {
+            if (objNoticiaAux != null)
+            {
+
+                if (!this.Frame.Navigate(typeof(View.NewDetail), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+        }
+
     }
 }

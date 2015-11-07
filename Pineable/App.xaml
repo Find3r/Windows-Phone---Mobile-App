@@ -71,7 +71,8 @@
                     <Image
                 Grid.Row="1"
                 Grid.ColumnSpan="3"
-                Source="{Binding PictureURL}" />
+                Source="{Binding PictureURL}"
+                       />
 
                     <TextBlock
                 Grid.Row="2"
@@ -178,7 +179,7 @@
                             Source="{Binding StatusPictureURL}" 
                             Width="40" 
                             Height="40" 
-                        HorizontalAlignment="Left"/>
+                            HorizontalAlignment="Left"/>
 
                         <TextBlock
                             Grid.Column="1" 
@@ -204,7 +205,7 @@
                             Foreground="#5F4C0B" 
                             FontSize="18"  
                             Margin="10,0,0,0"
-                         HorizontalAlignment="Right"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Center" />
 
                     </Grid>
@@ -460,16 +461,25 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image 
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Height="60" 
-                    Width="60" 
-                    Source="{Binding UrlImagen}" 
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Margin="0,0,10,0"
-                    Stretch="Fill"/>
+                <Ellipse
+               Grid.Row="0"
+               Grid.Column="0"
+               Height="50" 
+               Width="50"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Margin="0,0,10,0">
+
+                    <Ellipse.Fill>
+                        <ImageBrush 
+                        x:Name="imgvPerfilUsuario"
+                        ImageSource="{Binding UserPictureURL}" 
+                        AlignmentX="Center" 
+                        AlignmentY="Center" />
+                    </Ellipse.Fill>
+
+                </Ellipse>
+
 
                 <StackPanel
                     Orientation="Vertical"                    
@@ -483,13 +493,12 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Left">
                     
-                        <Run Text="{Binding NombreUsuario}"  />
-                        <Run Text="{Binding ApellidosUsuario}" />
+                        <Run Text="{Binding UserName}"  />
 
                     </TextBlock>
 
                     <TextBlock 
-                        Text="{Binding Descripcion}" 
+                        Text="{Binding Description}" 
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontSize="14" 

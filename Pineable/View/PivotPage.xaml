@@ -21,6 +21,7 @@
 
     <Grid
         Background="#e8e8e8">
+
         <Pivot x:Uid="Pivot" Foreground="#ff80a51e" Title="App" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -37,9 +38,7 @@
                 Margin="19,14.5,19,0"
                 Header="Reciente"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
-                
-                
-                
+
                 <!--Double line list with text wrapping-->
                 <Grid>
                     <Grid.RowDefinitions >
@@ -51,8 +50,174 @@
                     <ListView
                         Name="lstvUltimasNoticias"
                         IsItemClickEnabled="True"
-                        ItemTemplate="{StaticResource itemNoticiaCompleta}"
-                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="lstvUltimasNoticias_ItemClick">
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True"
+                        ItemClick="lstvUltimasNoticias_ItemClick">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                
+                                <Grid Grid.Row="1"
+                                    Margin="5" 
+                                    Height="Auto" 
+                                    Background="#fff">
+
+                                    <Grid
+                                        Margin="15">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                            <Ellipse
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               Height="50" 
+                                               Width="50"
+                                               VerticalAlignment="Top"
+                                               HorizontalAlignment="Left"
+                                               Margin="10">     
+
+                                                <Ellipse.Fill>
+                                                    <ImageBrush 
+                                                        x:Name="imgvPerfilUsuarioTemplate"
+                                                        ImageSource="{Binding UserPictureURL}" 
+                                                        AlignmentX="Center" 
+                                                        AlignmentY="Center" />
+                                                </Ellipse.Fill>
+
+                                            </Ellipse>
+
+                                        <TextBlock
+                                            Text="{Binding UserName}"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Foreground="#212121"
+                                            FontSize="18"/>
+
+                                        <Image
+                                            Grid.Row="0"
+                                            Grid.Column="2"
+                                            Width="40"
+                                            Height="40"
+                                            Source="ms-appx:///Assets/options.png"
+                                            HorizontalAlignment="Right" Tapped="NavigateNewDetail"
+                                            />
+
+                                        <Image
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="3"
+                                            Source="{Binding PictureURL}" />
+
+                                        <TextBlock
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="3"
+                                            Foreground="#FF5722"
+                                            FontSize="25"
+                                            Margin="0,10"
+                                            Text="{Binding Name}" />
+
+                                        <Image
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            Source="ms-appx:///Assets/calendar.png" 
+                                            Width="35"
+                                            Height="35"/>
+
+                                        <TextBlock
+                                            Text="{Binding DateShort}"
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="2"
+                                            VerticalAlignment="Center"
+                                            Foreground="#212121"
+                                            FontSize="18"/>
+
+                                        <TextBlock
+                                            Grid.Row="4"
+                                            Grid.ColumnSpan="3"
+                                            Foreground="#FF5722"
+                                            FontSize="25"
+                                            Margin="0,10"
+                                            Text="Descripción" />
+
+                                        <TextBlock
+                                            Grid.Row="5"
+                                            Grid.ColumnSpan="3"
+                                            Foreground="#212121"
+                                            FontSize="18"
+                                            Text="{Binding Description}" 
+                                            TextWrapping="Wrap"
+                                            TextAlignment="Justify"/>
+
+                                        <Grid 
+                                            Grid.Row="6" 
+                                            Grid.ColumnSpan="3"
+                                            Margin="0,10">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+
+
+                                            <Image 
+                                                Grid.Column="0" 
+                                                Source="{Binding StatusPictureURL}" 
+                                                Width="40" 
+                                                Height="40" 
+                                                HorizontalAlignment="Left"/>
+
+                                            <TextBlock
+                                                Grid.Column="1" 
+                                                Text="{Binding StatusName}"
+                                                FontSize="18" 
+                                                Foreground="#5F4C0B"  
+                                                HorizontalAlignment="Left"
+                                                Margin="10,0,0,0"
+                                                VerticalAlignment="Center" />
+
+                                            <Image 
+                                                Grid.Column="3"  
+                                                Source="ms-appx:///Assets/comment.png"
+                                                Width="40" 
+                                                Height="40"  
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Tapped="AddCommentNew" />
+
+                                            <TextBlock 
+                                                Grid.Column="4"  
+                                                Text="{Binding QuantityComments}"  
+                                                Foreground="#5F4C0B" 
+                                                FontSize="18"  
+                                                Margin="10,0,0,0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center" />
+
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
                     </ListView>
                 </Grid>
@@ -77,17 +242,6 @@
                         Name="grdvAreas"
                         ItemTemplate="{StaticResource itemListaAreas}" />
                         
-                        <!--
-                    <ListView
-                        Name="lstvMisNoticias"
-                        IsItemClickEnabled="True"
-                        ItemTemplate="{StaticResource itemNoticia}"
-                        ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemClick="lstvUltimasNoticias_ItemClick">
-
-                    </ListView>
-                        
-                        -->
-
                     <TextBlock 
                             Grid.Row="0" 
                             Name="txtMiSeguimiento" 
@@ -228,6 +382,7 @@
             Foreground="#f7931e"
             VerticalAlignment="Center" 
             HorizontalAlignment="Center"/>
+        
     </Grid>
 
     <Page.BottomAppBar >

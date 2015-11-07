@@ -8,8 +8,8 @@ namespace Pineable.Model
 {
     public class CommentCustom : Comment
     {
-        public string Name { get; set; }
+        public string UserName { get; set; }
 
-        public string PictureURL { get; set; }
+        public string UserPictureURL { get; set; }
     }
 }
