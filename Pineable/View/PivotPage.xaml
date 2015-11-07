@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:Pineable.Data"
+    
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -21,7 +22,7 @@
 
     <!-- Declare the shared flyout as a resource. -->
     <Page.Resources>
-        
+
         <MenuFlyout x:Key="menu">
 
             <MenuFlyoutItem Text="Reportar" Background="White" Foreground="Black" Click="ReportNew" />
@@ -31,18 +32,86 @@
             <MenuFlyoutItem Text="Cancelar" Background="White" Foreground="Black"/>
 
         </MenuFlyout>
+        <Thickness x:Key="PivotPortraitThemePadding">19,0,0,0</Thickness>
+        <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
+        <Style x:Key="PivotStyle" TargetType="Pivot">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <Grid/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Pivot">
+                        <Grid x:Name="RootElement" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="Orientation">
+                                    <VisualState x:Name="Portrait">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Landscape">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" Style="{StaticResource PivotTitleContentControlStyle}"/>
+                            <ScrollViewer x:Name="ScrollViewer" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Grid.Row="1" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
+                                <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
+                                    <PivotHeaderPanel x:Name="Header" Background="#ff80a51e" >
+                                        <PivotHeaderPanel.RenderTransform>
+                                            <CompositeTransform x:Name="HeaderTranslateTransform" TranslateX="0"/>
+                                        </PivotHeaderPanel.RenderTransform>
+                                    </PivotHeaderPanel>
+                                    <ItemsPresenter x:Name="PivotItemPresenter">
+                                        <ItemsPresenter.RenderTransform>
+                                            <TranslateTransform x:Name="ItemsPresenterTranslateTransform" X="0"/>
+                                        </ItemsPresenter.RenderTransform>
+                                    </ItemsPresenter>
+                                </PivotPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
 
     </Page.Resources>
 
     <Grid
         Background="#e8e8e8">
 
-        <Pivot x:Uid="Pivot" Foreground="#ff80a51e" Title="App" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding}" Foreground="#ff80a51e"/>
-                        <Image Width="50" Height="50" />
+        <Pivot x:Uid="Pivot" Foreground="#ff80a51e" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Style="{StaticResource PivotStyle}">
+            <Pivot.HeaderTemplate >
+                <DataTemplate >
+                    <Grid
+                        Margin="0,20"
+                        Width="Auto"
+                        Height="Auto"
+                       >
+
+                        <TextBlock  Height="Auto" Text="{Binding}" />
                     </Grid>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
@@ -70,7 +139,7 @@
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                
+
                                 <Grid Grid.Row="1"
                                     Margin="5" 
                                     Height="Auto" 
@@ -96,24 +165,24 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                            <Ellipse
+                                        <Ellipse
                                                Grid.Row="0"
                                                Grid.Column="0"
                                                Height="30" 
                                                Width="30"
                                                VerticalAlignment="Top"
                                                HorizontalAlignment="Left"
-                                                Margin="0,0,0,10">     
+                                                Margin="0,0,0,10">
 
-                                                <Ellipse.Fill>
-                                                    <ImageBrush 
+                                            <Ellipse.Fill>
+                                                <ImageBrush 
                                                         x:Name="imgvPerfilUsuarioTemplate"
                                                         ImageSource="{Binding UserPictureURL}" 
                                                         AlignmentX="Center" 
                                                         AlignmentY="Center" />
-                                                </Ellipse.Fill>
+                                            </Ellipse.Fill>
 
-                                            </Ellipse>
+                                        </Ellipse>
 
                                         <TextBlock
                                             Text="{Binding UserName}"
@@ -248,7 +317,7 @@
             <PivotItem
                 x:Uid="PivotItem2"
                 Margin="19,14.5,19,0"
-                Header="Seguimiento"
+                 Header="Buscar"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
                 <!--Double line list with text wrapping-->
                 <Grid>
@@ -258,11 +327,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <GridView
                         Name="grdvAreas"
                         ItemTemplate="{StaticResource itemListaAreas}" />
-                        
+
                     <TextBlock 
                             Grid.Row="0" 
                             Name="txtMiSeguimiento" 
@@ -281,7 +350,7 @@
             <PivotItem
                 x:Uid="PivotItem3"
                 Margin="19,14.5,19,0"
-                Header="Notificaciones"
+                 Header="Notificaciones"
                 CommonNavigationTransitionInfo.IsStaggerElement="True">
                 <!--Double line list with text wrapping-->
                 <Grid>
@@ -292,8 +361,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                   
-                   
+
+
                     <ListView
                         Name="lstvNotificaciones"
                         IsItemClickEnabled="True"
@@ -404,7 +473,7 @@
             VerticalAlignment="Center" 
             HorizontalAlignment="Center"/>
 
-      
+
 
     </Grid>
 
@@ -415,8 +484,8 @@
             >
 
             <CommandBar.PrimaryCommands>
-           
-            <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
+
+                <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
             </CommandBar.PrimaryCommands>
 
         </CommandBar>
