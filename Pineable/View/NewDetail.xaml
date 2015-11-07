@@ -38,16 +38,17 @@
             <ScrollViewer 
                 Grid.Row="0"
                 Grid.RowSpan="2"
-                ZoomMode="Enabled"
-                >
+                ZoomMode="Enabled" 
+                MinZoomFactor="1"
+                HorizontalScrollBarVisibility="Auto" 
+                VerticalScrollBarVisibility="Auto" >
                
-          
-
             <Image
-                Name="imgvNew"
-               
+                Name="imgvNew"            
                 Source="ms-appx:///Assets/alm.png" 
-                Stretch="Uniform"
+                Stretch="None" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
                 />
 
             </ScrollViewer>
