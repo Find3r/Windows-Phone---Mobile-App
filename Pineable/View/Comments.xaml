@@ -8,6 +8,74 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate
+             x:Name="itemComentario">
+            <Grid 
+                Margin="5"
+                Height="Auto" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"  />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Ellipse
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Height="50" 
+                   Width="50"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,10,0"
+                   Tapped="NavigateUserProfile">
+
+                    <Ellipse.Fill>
+                        <ImageBrush 
+                        x:Name="imgvPerfilUsuario"
+                        ImageSource="{Binding UserPictureURL}" 
+                        AlignmentX="Center" 
+                        AlignmentY="Center" />
+                    </Ellipse.Fill>
+
+                </Ellipse>
+
+
+                <StackPanel
+                    Orientation="Vertical"                    
+                    Grid.Row="0"
+                    Grid.Column="1">
+
+                    <TextBlock                 
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontSize="14" 
+                        FontWeight="Bold"
+                        HorizontalAlignment="Left"
+                        Tapped="NavigateUserProfile">
+                    
+                        <Run Text="{Binding UserName}"  />
+
+                    </TextBlock>
+
+                    <TextBlock 
+                        Text="{Binding Description}" 
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontSize="14" 
+                        HorizontalAlignment="Left" />
+
+                </StackPanel>
+
+
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid 
         x:Name="container"
         Background="#e8e8e8">

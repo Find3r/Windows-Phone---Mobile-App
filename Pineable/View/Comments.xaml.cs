@@ -130,5 +130,17 @@ namespace Pineable.View
             // ocultamos la barra de carga
             progressRing.IsActive = false;
         }
+
+        private void NavigateUserProfile(object sender, TappedRoutedEventArgs e)
+        {
+            if (OBJ_NOTICIA != null)
+            {
+
+                if (!this.Frame.Navigate(typeof(View.UserProfile), OBJ_NOTICIA))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+        }
     }
 }
