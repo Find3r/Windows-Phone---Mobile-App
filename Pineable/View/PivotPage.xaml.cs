@@ -97,12 +97,13 @@ namespace Pineable
             grdvAreas.ItemsSource = lstCategorias;
 
             // notificaciones
-            IEnumerable<Notificacionusuario> lstNotifications = await notificationsTable.Where(e => e.IdUser == objUsuarioLogueado.Id).ToEnumerableAsync();
+            IEnumerable<Notificacionusuario> lstNotifications = await notificationsTable.Where(e => e.IdUser == objUsuarioLogueado.Id).OrderBy(e => e.DateCreated).ToEnumerableAsync();
 
             lstvNotificaciones.ItemsSource = lstNotifications;
 
+            // se cargan las noticias del usuario
+            IEnumerable<NewCustom> lstUserPosts = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", objUsuarioLogueado.Id } });
 
-            //lstvMisNoticias.ItemsSource = lstNoticias;
             /*
             if (lstNoticias.Count == 0)
             {
@@ -126,7 +127,7 @@ namespace Pineable
 
             }
             */
-            lstvUserPosts.ItemsSource = lstNoticias;
+            lstvUserPosts.ItemsSource = lstUserPosts;
             lstvUltimasNoticias.ItemsSource = lstNoticias;
 
             progressRing.IsActive = false;
