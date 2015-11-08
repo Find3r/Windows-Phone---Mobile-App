@@ -30,7 +30,7 @@ namespace Pineable
     public sealed partial class PivotPage : Page
     {
         
-        public User objUsuarioLogueado;
+        public Usuario objUsuarioLogueado;
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
@@ -40,7 +40,7 @@ namespace Pineable
         public PivotPage()
         {
             this.InitializeComponent();
-            objUsuarioLogueado = new User();
+            objUsuarioLogueado = new Usuario();
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
@@ -225,7 +225,7 @@ namespace Pineable
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            objUsuarioLogueado = new User();
+            objUsuarioLogueado = new Usuario();
 
             if (this.Frame.CanGoBack)
             {
@@ -240,7 +240,7 @@ namespace Pineable
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedFrom(e);
+            //this.navigationHelper.OnNavigatedFrom(e);
         }
 
         #endregion
@@ -302,6 +302,18 @@ namespace Pineable
             if (!this.Frame.Navigate(typeof(NewsCategory), objCategory))
             {
                 throw new Exception("Failed to create initial page");
+            }
+        }
+
+        private void NavigateUserProfile(object sender, TappedRoutedEventArgs e)
+        {
+            if (objNoticiaAux != null)
+            {
+
+                if (!this.Frame.Navigate(typeof(View.UserProfile), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
             }
         }
     }

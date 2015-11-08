@@ -240,5 +240,17 @@ namespace Pineable
         {
 
         }
+
+        private void NavigateUserProfile(object sender, TappedRoutedEventArgs e)
+        {
+            if (objNoticiaAux != null)
+            {
+
+                if (!this.Frame.Navigate(typeof(View.UserProfile), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+        }
     }
 }
