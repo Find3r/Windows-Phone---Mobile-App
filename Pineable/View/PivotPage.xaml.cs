@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
+using Microsoft.WindowsAzure.MobileServices;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -73,21 +74,22 @@ namespace Pineable
 
         private async void cargarDatos()
         {
+
+            IMobileServiceTable<Categoria> categoryTable = App.MobileService.GetTable<Categoria>();
+
             objUsuarioLogueado.Id = "1";
             objUsuarioLogueado.IdCountry = "1";
             objUsuarioLogueado.Name = "Carlos Castro Brenes";
             objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
             objUsuarioLogueado.CoverPicture = "ms-appx:///Assets/Hawaiio.jpg";
 
-            lstvUserPosts.DataContext = objUsuarioLogueado; 
+            lstvUserPosts.DataContext = objUsuarioLogueado;
 
+            // se cargan las últimas noticias
             IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
 
-            List<Category> lstCategorias = new List<Category>();
-            for (int i = 0; i < 5; i++)
-            {
-                lstCategorias.Add(new Category() { Id = i.ToString(), Name = i.ToString(), PictureURL = "ms-appx:///Assets/car.png" });
-            }
+            // se cargan las categorías
+            IEnumerable<Categoria> lstCategorias = await categoryTable.OrderByDescending(e => e.Name).ToEnumerableAsync();
 
             grdvAreas.ItemsSource = lstCategorias;
 
@@ -171,10 +173,10 @@ namespace Pineable
             //txtNombreUsuario.Text = objUsuarioLogueado.Name;
             //txtDireccionUsuario.Text = "Costa Rica";
 
-            List<Category> lstCategorias = new List<Category>();
+            List<Categoria> lstCategorias = new List<Categoria>();
             for (int i = 0; i < 5; i++)
             {
-                lstCategorias.Add(new Category() { Id = i.ToString(), Name = i.ToString(), PictureURL = "ms-appx:///Assets/car.png" });
+                lstCategorias.Add(new Categoria() { Id = i.ToString(), Name = i.ToString(), PictureURL = "ms-appx:///Assets/car.png" });
             }
 
             grdvAreas.ItemsSource = lstCategorias;
@@ -266,10 +268,7 @@ namespace Pineable
 
         private void lstvUltimasNoticias_ItemClick(object sender, ItemClickEventArgs e)
         {
-
             objNoticiaAux = e.ClickedItem as NewCustom;
-   
-
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -319,7 +318,7 @@ namespace Pineable
 
         private void grdvAreas_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Category objCategory = e.ClickedItem as Category;
+            Categoria objCategory = e.ClickedItem as Categoria;
 
             if (!this.Frame.Navigate(typeof(NewsCategory), objCategory))
             {

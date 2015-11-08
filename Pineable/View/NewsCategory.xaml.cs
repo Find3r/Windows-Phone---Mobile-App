@@ -29,7 +29,7 @@ namespace Pineable
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        Category OBJ_CATEGORY;
+        Categoria OBJ_CATEGORY;
         NewCustom objNoticiaAux;
 
         public NewsCategory()
@@ -106,7 +106,7 @@ namespace Pineable
         {
             this.navigationHelper.OnNavigatedTo(e);
 
-            Category objCategory = e.Parameter as Category;
+            Categoria objCategory = e.Parameter as Categoria;
 
             if (objCategory != null)
             {
