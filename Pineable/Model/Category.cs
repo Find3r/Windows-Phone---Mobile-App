@@ -9,7 +9,7 @@ namespace Pineable.Model
 {
     public class Categoria
     {
-      
+          
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 

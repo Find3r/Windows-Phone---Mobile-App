@@ -528,26 +528,27 @@
                 </Grid.RowDefinitions>
 
                 <Image 
-            Grid.RowSpan="2"
-            Source="ms-appx:///Assets/siren.png"
-            Width="50"
-            Height="50"/>
+                    Grid.RowSpan="2"
+                    Source="ms-appx:///Assets/siren.png"
+                    Width="50"
+                    Height="50"/>
 
                 <TextBlock
-            Grid.Row="0"
-            Grid.Column="1"
-            Margin="10,0,0,0"
-            Text="{Binding Description}" 
-            FontSize="18"
-            VerticalAlignment="Center"/>
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    Text="{Binding Description}" 
+                    TextWrapping="Wrap"
+                    FontSize="18"
+                    VerticalAlignment="Center"/>
 
                 <TextBlock
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="10,0,0,0"
-            Text="{Binding DateCreated}" 
-            FontSize="18"
-            VerticalAlignment="Center"/>
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    Text="{Binding DateShort}" 
+                    FontSize="16"
+                    VerticalAlignment="Center"/>
 
 
             </Grid>

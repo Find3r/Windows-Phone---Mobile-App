@@ -76,8 +76,11 @@ namespace Pineable
         {
 
             IMobileServiceTable<Categoria> categoryTable = App.MobileService.GetTable<Categoria>();
+            
+          
+            IMobileServiceTable<Notificacionusuario> notificationsTable = App.MobileService.GetTable<Notificacionusuario>();
 
-            objUsuarioLogueado.Id = "1";
+            objUsuarioLogueado.Id = "1209577962402395";
             objUsuarioLogueado.IdCountry = "1";
             objUsuarioLogueado.Name = "Carlos Castro Brenes";
             objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
@@ -89,17 +92,12 @@ namespace Pineable
             IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
 
             // se cargan las categorías
-            IEnumerable<Categoria> lstCategorias = await categoryTable.OrderByDescending(e => e.Name).ToEnumerableAsync();
+            IEnumerable<Categoria> lstCategorias = await categoryTable.OrderBy(e => e.Name).ToEnumerableAsync();
 
             grdvAreas.ItemsSource = lstCategorias;
 
             // notificaciones
-            List<UserNotification> lstNotifications = new List<UserNotification>();
-
-            for (int i = 0; i < 15; i++)
-            {
-                lstNotifications.Add(new UserNotification() { Id = i.ToString(), DateCreated = DateTime.Now, IdNew = i.ToString(), IdUser = i.ToString(), StatusRead = false, Description = "Texto " + i.ToString() });
-            }
+            IEnumerable<Notificacionusuario> lstNotifications = await notificationsTable.Where(e => e.IdUser == objUsuarioLogueado.Id).ToEnumerableAsync();
 
             lstvNotificaciones.ItemsSource = lstNotifications;
 
@@ -182,11 +180,11 @@ namespace Pineable
             grdvAreas.ItemsSource = lstCategorias;
 
             // notificaciones
-            List<UserNotification> lstNotifications = new List<UserNotification>();
+            List<Notificacionusuario> lstNotifications = new List<Notificacionusuario>();
 
             for (int i = 0; i < 15; i++)
             {
-                lstNotifications.Add(new UserNotification() { Id = i.ToString(), DateCreated = DateTime.Now, IdNew = i.ToString(), IdUser = i.ToString(), StatusRead = false, Description = "Texto " + i.ToString() });
+                lstNotifications.Add(new Notificacionusuario() { Id = i.ToString(), DateCreated = DateTime.Now, IdNew = i.ToString(), IdUser = i.ToString(), StatusRead = false, Description = "Texto " + i.ToString() });
             }
             lstvNotificaciones.ItemsSource = lstNotifications;
 
