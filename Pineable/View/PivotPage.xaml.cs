@@ -192,27 +192,7 @@ namespace Pineable
 
             //lstvMisNoticias.ItemsSource = lstNoticias;
 
-            if (lstNoticias.Count == 0)
-            {
-                txtMiSeguimiento.Visibility = Visibility.Visible;
-                txtMiSeguimiento.Text = "Aún no sigues ninguna noticia";
-            }
-            else
-            {
-                txtMiSeguimiento.Visibility = Visibility.Collapsed;
-
-            }
-
-            if (lstNoticias.Count == 0)
-            {
-                //txtComentarios.Visibility = Visibility.Visible;
-                //txtComentarios.Text = "El usuario aún no tiene reportes";
-            }
-            else
-            {
-                //txtComentarios.Visibility = Visibility.Collapsed;
-
-            }
+            
             lstvUserPosts.ItemsSource = lstNoticias;
             lstvUltimasNoticias.ItemsSource = lstNoticias;
 

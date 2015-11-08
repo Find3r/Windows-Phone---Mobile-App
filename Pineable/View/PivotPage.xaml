@@ -410,15 +410,6 @@
                         ItemTemplate="{StaticResource itemListaAreas}" 
                         ItemClick="grdvAreas_ItemClick" 
                         IsItemClickEnabled="True" />
-
-                    <TextBlock 
-                        Grid.Row="0" 
-                        Name="txtMiSeguimiento" 
-                        TextWrapping="Wrap" 
-                        TextAlignment="Center"
-                        Margin="0,15,0,0"
-                        FontSize="25"
-                        Foreground="#5F4C0B"/>
                     
                 </Grid>
                 

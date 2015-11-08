@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -118,7 +119,7 @@ namespace Pineable
 
         private async void verificarConexion()
         {
-            cargarDatos();
+           
 
             if (App.NetworkAvailable)
             {
@@ -134,10 +135,23 @@ namespace Pineable
                 //No hay conexión a Internet
                 MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
                 await info.ShowAsync();
+                cargarDatosOffline();
             }
         }
 
-        private void cargarDatos()
+        private async void cargarDatos()
+        {
+            // se establece el título
+            txtTitle.Text = OBJ_CATEGORY.Name;
+
+            // se cargan las noticias de una categoría
+            IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_category", HttpMethod.Get, new Dictionary<string,string> { { "id", OBJ_CATEGORY.Id } });
+            lstvUltimasNoticias.ItemsSource = lstNoticias;
+
+            progressRing.IsActive = false;
+        }
+
+        private void cargarDatosOffline()
         {
 
             txtTitle.Text = OBJ_CATEGORY.Name;
