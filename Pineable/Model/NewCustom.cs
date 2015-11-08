@@ -19,10 +19,29 @@ namespace Pineable.Model
         public string NameZone { get; set; }
 
         [JsonProperty(PropertyName = "Column16")]
-        public int QuantityComments { get; set; }
+        private int? quantityComments { get; set; }
 
         [JsonProperty(PropertyName = "estado_seguimiento")]
         public bool StatusFollow { get; set; }
+
+        public int QuantityComments
+        {
+            get
+            {
+                if (quantityComments == null)
+                {
+                    return 0;
+            
+                }
+                else
+                {
+                    return (int)quantityComments;
+                }
+            }
+            set { quantityComments = value; }
+        }
+
+
 
 
         public string StatusPictureURL

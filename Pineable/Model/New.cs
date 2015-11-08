@@ -38,7 +38,7 @@ namespace Pineable.Model
         public string IdZone { get; set; }
 
         [JsonProperty(PropertyName = "cantidad_reportes")]
-        public int QuantityReports { get; set; }
+        private int ? quantityReports { get; set; }
 
         [JsonProperty(PropertyName = "latitud")]
         public string Latitude { get; set; }
@@ -53,5 +53,22 @@ namespace Pineable.Model
                 return DateLost.ToString("dd-MM-yyyy", new CultureInfo("es-ES"));
             }
         }
+
+        public int QuantityReports
+        {
+            get
+            {
+                if (quantityReports == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return (int) quantityReports;
+                }
+            }
+            set { quantityReports = value; }
+        }
+
     }
 }

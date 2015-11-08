@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Net.Http;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -45,11 +46,10 @@ namespace Pineable
            
         }
 
-        private  void verificarConexion()
+        private async void verificarConexion()
         {
-            cargarDatosOffline();
-
-            /*
+           
+          
             if (App.NetworkAvailable)
             {
                 //Hay conexión a Internet
@@ -58,18 +58,78 @@ namespace Pineable
                 lstvUserPosts.ItemsSource = null;
                 lstvUltimasNoticias.ItemsSource = null;
 
-               // cargarDatos();
-                //progressRing.IsActive = false;
-
+                cargarDatos();
+                
             }
             else
             {
                 //No hay conexión a Internet
-                //MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
-                //await info.ShowAsync();
-                
+                MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
+                await info.ShowAsync();
+                cargarDatosOffline();
+            }
+            
+        }
+
+        private async void cargarDatos()
+        {
+            objUsuarioLogueado.Id = "1";
+            objUsuarioLogueado.IdCountry = "1";
+            objUsuarioLogueado.Name = "Carlos Castro Brenes";
+            objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
+            objUsuarioLogueado.CoverPicture = "ms-appx:///Assets/Hawaiio.jpg";
+
+            lstvUserPosts.DataContext = objUsuarioLogueado; 
+
+            IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
+
+            List<Category> lstCategorias = new List<Category>();
+            for (int i = 0; i < 5; i++)
+            {
+                lstCategorias.Add(new Category() { Id = i.ToString(), Name = i.ToString(), PictureURL = "ms-appx:///Assets/car.png" });
+            }
+
+            grdvAreas.ItemsSource = lstCategorias;
+
+            // notificaciones
+            List<UserNotification> lstNotifications = new List<UserNotification>();
+
+            for (int i = 0; i < 15; i++)
+            {
+                lstNotifications.Add(new UserNotification() { Id = i.ToString(), DateCreated = DateTime.Now, IdNew = i.ToString(), IdUser = i.ToString(), StatusRead = false, Description = "Texto " + i.ToString() });
+            }
+
+            lstvNotificaciones.ItemsSource = lstNotifications;
+
+
+            //lstvMisNoticias.ItemsSource = lstNoticias;
+            /*
+            if (lstNoticias.Count == 0)
+            {
+                txtMiSeguimiento.Visibility = Visibility.Visible;
+                txtMiSeguimiento.Text = "Aún no sigues ninguna noticia";
+            }
+            else
+            {
+                txtMiSeguimiento.Visibility = Visibility.Collapsed;
+
+            }
+
+            if (lstNoticias.Count == 0)
+            {
+                //txtComentarios.Visibility = Visibility.Visible;
+                //txtComentarios.Text = "El usuario aún no tiene reportes";
+            }
+            else
+            {
+                //txtComentarios.Visibility = Visibility.Collapsed;
+
             }
             */
+            lstvUserPosts.ItemsSource = lstNoticias;
+            lstvUltimasNoticias.ItemsSource = lstNoticias;
+
+            progressRing.IsActive = false;
         }
 
         private void cargarDatosOffline()
@@ -214,7 +274,7 @@ namespace Pineable
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-
+            verificarConexion();
         }
 
         private void AddCommentNew(object sender, TappedRoutedEventArgs e)
