@@ -20,39 +20,57 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid 
-        >
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <Grid
+                Name="grdPerfil"
+                
+                Grid.Row="0"
+                Margin="5" >
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Hawaiio.jpg"/>
+        </Grid.Background>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-       
-        <Image 
-            Grid.RowSpan="2"
-            Source="ms-appx:///Assets/siren.png"
-            Width="50"
-            Height="50"/>
-        
-        <TextBlock
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="Título" 
-            FontSize="18"
-                        VerticalAlignment="Center"/>
+
+        <Ellipse
+                    Margin="0,20,0,0"
+                    Grid.Row="0"
+                    Height="100" 
+                    Width="100"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <Ellipse.Fill>
+
+                <ImageBrush 
+                            x:Name="imgvPerfilUsuario"
+                            ImageSource="{Binding PictureUrl}" 
+                            AlignmentX="Center" 
+                            AlignmentY="Center" />
+
+            </Ellipse.Fill>
+
+        </Ellipse>
 
         <TextBlock
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="Subtítulo" 
-            FontSize="18"
-            VerticalAlignment="Center"/>
+                    Grid.Row="1"
+                    TextAlignment="Center"
+                    Text="{Binding Name}"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#f7931e"
+                    Name="txtNombreUsuario" />
 
+        <TextBlock
+                    Grid.Row="2"
+                    TextAlignment="Center"
+                    Margin="0,5,0,0"
+                    Text="{Binding IdCountry}"
+                    Foreground="#5F4C0B"
+                    Name="txtDireccionUsuario" />
 
     </Grid>
 </Page>

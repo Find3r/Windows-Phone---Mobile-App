@@ -272,7 +272,6 @@
 
             <Grid
                 Name="grdPerfil"
-                Background="#f8f8f8"
                 Grid.Row="0"
                 Margin="5">
 
@@ -281,6 +280,22 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.RowSpan="3">
+                    
+                    <Grid.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="{Binding CoverPicture}"/>
+                    </Grid.Background>
+                
+                </Grid>
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.RowSpan="3" 
+                    Background="Black"
+                    Opacity="0.7" />
 
                 <Ellipse
                     Margin="0,20,0,0"
@@ -308,7 +323,7 @@
                     Text="{Binding Name}"
                     FontSize="20"
                     FontWeight="Bold"
-                    Foreground="#f7931e"
+                    Foreground="White"
                     Name="txtNombreUsuario" />
 
                 <TextBlock
