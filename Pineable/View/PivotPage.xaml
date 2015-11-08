@@ -435,7 +435,8 @@
                     <ListView
                         Name="lstvNotificaciones"
                         IsItemClickEnabled="True"
-                        ItemTemplate="{StaticResource itemNotificacion}" />
+                        ItemClick="NavigateCommentsNew"
+                        ItemTemplate="{StaticResource itemNotificacion}"  />
 
                 </Grid>
 

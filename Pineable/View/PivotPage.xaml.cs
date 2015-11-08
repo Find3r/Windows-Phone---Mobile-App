@@ -269,6 +269,8 @@ namespace Pineable
 
         private void NavigateNewDetail(object sender, TappedRoutedEventArgs e)
         {
+           
+
             if (objNoticiaAux != null)
             {
 
@@ -311,6 +313,21 @@ namespace Pineable
             {
 
                 if (!this.Frame.Navigate(typeof(View.UserProfile), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+        }
+
+        private void NavigateCommentsNew(object sender, ItemClickEventArgs e)
+        {
+            Notificacionusuario objNotification = e.ClickedItem as Notificacionusuario;
+
+            if (objNotification != null)
+            {
+
+
+                if (!this.Frame.Navigate(typeof(View.Comments), new NewCustom() { Id = objNotification.IdNew}))
                 {
                     throw new Exception("Failed to create initial page");
                 }
