@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -51,15 +52,15 @@ namespace Pineable.View
 
         private async void verificarConexion()
         {
-            cargarDatos();
+           
 
             if (App.NetworkAvailable)
             {
                 //Hay conexión a Internet
                 progressRing.IsActive = true;
-
                 cargarDatos();
-                //progressRing.IsActive = false;
+                
+               
 
             }
             else
@@ -67,10 +68,20 @@ namespace Pineable.View
                 //No hay conexión a Internet
                 MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
                 await info.ShowAsync();
+                cargarDatosOffline();
             }
         }
 
-        private void cargarDatos()
+        private async void cargarDatos()
+        {
+            // se cargan las noticias de una categoría
+            IEnumerable<CommentCustom> lstComments = await App.MobileService.InvokeApiAsync<IEnumerable<CommentCustom>>("postcomments", HttpMethod.Get, new Dictionary<string, string> { { "id", OBJ_NOTICIA.Id } });
+            lstvComentarios.ItemsSource = lstComments;
+
+            progressRing.IsActive = false;
+        }
+
+        private void cargarDatosOffline()
         {
              lstComentarios = new List<CommentCustom>();
 
