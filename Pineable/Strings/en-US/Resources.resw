@@ -120,6 +120,9 @@
   <data name="AddAppBarButton.Label" xml:space="preserve">
     <value>add</value>
   </data>
+  <data name="Green.Background" xml:space="preserve">
+    <value>#ff80a51e</value>
+  </data>
   <data name="NavigationFailedExceptionMessage" xml:space="preserve">
     <value>Navigation failed.</value>
   </data>

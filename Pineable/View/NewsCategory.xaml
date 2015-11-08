@@ -1,0 +1,275 @@
+﻿<Page
+    x:Class="Pineable.NewsCategory"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pineable"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <MenuFlyout x:Key="menu">
+
+            <MenuFlyoutItem Text="Reportar" Background="White" Foreground="Black" Click="ReportNew" />
+
+            <MenuFlyoutItem Text="Editar" Background="White" Foreground="Black" Click="EditNew"  />
+
+            <MenuFlyoutItem Text="Cancelar" Background="White" Foreground="Black"/>
+
+        </MenuFlyout>
+
+        <DataTemplate x:Key="itemNoticiaPersonalizada">
+
+            <Grid 
+                Grid.Row="1"
+                Margin="5" 
+                Height="Auto" 
+                Background="#fff">
+
+                <Grid
+                    Margin="15">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Ellipse
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Height="30" 
+                        Width="30"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,10">
+
+                        <Ellipse.Fill>
+
+                            <ImageBrush 
+                                x:Name="imgvPerfilUsuarioTemplate"
+                                ImageSource="{Binding UserPictureURL}" 
+                                AlignmentX="Center" 
+                                AlignmentY="Center" />
+
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+
+                    <TextBlock
+                        Text="{Binding UserName}"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Foreground="#212121"
+                        FontSize="18"/>
+
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Width="30"
+                        Height="30"
+                        Source="ms-appx:///Assets/options.png"
+                        HorizontalAlignment="Right" 
+                        Margin="0,0,-15,0" 
+                        Tapped="OptionsNew" 
+                        FlyoutBase.AttachedFlyout="{StaticResource menu}"/>
+
+
+                    <Image
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        Source="{Binding PictureURL}"
+                        Tapped="NavigateNewDetail"/>
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        Foreground="#FF5722"
+                        FontSize="25"
+                        Margin="0,10"
+                        Text="{Binding Name}" />
+
+                    <Image
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Source="ms-appx:///Assets/calendar.png" 
+                        Width="35"
+                        Height="35"/>
+
+                    <TextBlock
+                        Text="{Binding DateShort}"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Center"
+                        Foreground="#212121"
+                        FontSize="18"
+                        Margin="5"/>
+
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.ColumnSpan="3"
+                        Foreground="#FF5722"
+                        FontSize="25"
+                        Margin="0,10"
+                        Text="Descripción" />
+
+                    <TextBlock
+                        Grid.Row="5"
+                        Grid.ColumnSpan="3"
+                        Foreground="#212121"
+                        FontSize="18"
+                        Text="{Binding Description}" 
+                        TextWrapping="Wrap"
+                        TextAlignment="Justify"/>
+
+                    <Grid 
+                        Grid.Row="6" 
+                        Grid.ColumnSpan="3"
+                        Margin="0,10">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image 
+                            Grid.Column="0" 
+                            Source="{Binding StatusPictureURL}" 
+                            Width="40" 
+                            Height="40" 
+                            HorizontalAlignment="Left"/>
+
+                        <TextBlock
+                            Grid.Column="1" 
+                            Text="{Binding StatusName}"
+                            FontSize="18" 
+                            Foreground="#5F4C0B"  
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            VerticalAlignment="Center" />
+
+                        <Image 
+                            Grid.Column="3"  
+                            Source="ms-appx:///Assets/comment.png"
+                            Width="40" 
+                            Height="40"  
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Tapped="AddCommentNew" />
+
+                        <TextBlock 
+                            Grid.Column="4"  
+                            Text="{Binding QuantityComments}"  
+                            Foreground="#5F4C0B" 
+                            FontSize="18"  
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Tapped="AddCommentNew"/>
+
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+
+        </DataTemplate>
+    </Page.Resources>
+    
+
+    <Grid 
+        x:Name="LayoutRoot"
+        Background="#e8e8e8" >
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid
+            x:Uid="Green"
+            Grid.Row="0"
+            Background="#ff80a51e" >
+        
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Name="txtTitle" Text="page title" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
+        </Grid>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid 
+            Grid.Row="1" 
+            x:Name="ContentRoot" 
+            Margin="19,14.5,19,0">
+            <Grid>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView
+                    Name="lstvUltimasNoticias"
+                    IsItemClickEnabled="True"
+                    ContinuumNavigationTransitionInfo.ExitElementContainer="True"
+                    ItemClick="lstvUltimasNoticias_ItemClick"
+                    ItemTemplate="{StaticResource itemNoticiaPersonalizada}" />
+
+            </Grid>
+        </Grid>
+
+        <ProgressRing 
+            Grid.Row="1"
+            Name="progressRing" 
+            Background="Transparent" 
+            Foreground="#f7931e"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center"/>
+
+    </Grid>
+
+    <Page.BottomAppBar>
+
+        <CommandBar 
+            x:Uid="Green"
+            x:Name="commandBar"
+            Background="{Binding}">
+
+            <CommandBar.PrimaryCommands>
+
+                <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
+
+            </CommandBar.PrimaryCommands>
+
+        </CommandBar>
+
+    </Page.BottomAppBar>
+
+</Page>

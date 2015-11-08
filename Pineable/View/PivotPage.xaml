@@ -404,16 +404,18 @@
 
                     <GridView
                         Name="grdvAreas"
-                        ItemTemplate="{StaticResource itemListaAreas}" />
+                        ItemTemplate="{StaticResource itemListaAreas}" 
+                        ItemClick="grdvAreas_ItemClick" 
+                        IsItemClickEnabled="True" />
 
                     <TextBlock 
-                            Grid.Row="0" 
-                            Name="txtMiSeguimiento" 
-                            TextWrapping="Wrap" 
-                            TextAlignment="Center"
-                            Margin="0,15,0,0"
-                            FontSize="25"
-                            Foreground="#5F4C0B"/>
+                        Grid.Row="0" 
+                        Name="txtMiSeguimiento" 
+                        TextWrapping="Wrap" 
+                        TextAlignment="Center"
+                        Margin="0,15,0,0"
+                        FontSize="25"
+                        Foreground="#5F4C0B"/>
                     
                 </Grid>
                 
@@ -473,8 +475,9 @@
     <Page.BottomAppBar>
         
         <CommandBar 
+            x:Uid="Green"
             x:Name="commandBar"
-            Background="#ff80a51e">
+            Background="{Binding}">
 
             <CommandBar.PrimaryCommands>
 
@@ -485,4 +488,5 @@
         </CommandBar>
         
     </Page.BottomAppBar>
+    
 </Page>

@@ -42,8 +42,7 @@ namespace Pineable
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+           
         }
 
         private  void verificarConexion()
@@ -167,73 +166,6 @@ namespace Pineable
             get { return this.navigationHelper; }
         }
 
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
-
-        /// <summary>
-        /// Populates the page with content passed during navigation. Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>.
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session. The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-1");
-        }
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache. Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/>.</param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-            // TODO: Save the unique state of the page here.
-        }
-
-        /// <summary>
-        /// Adds an item to the list when the app bar button is clicked.
-        /// </summary>
-       
-
-        /// <summary>
-        /// Invoked when an item within a section is clicked.
-        /// </summary>
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            // Navigate to the appropriate destination page, configuring the new page
-            // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
-        }
-
-        /// <summary>
-        /// Loads the content for the second pivot item when it is scrolled into view.
-        /// </summary>
-        private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
-        {
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-2");
-           
-        }
-
         #region NavigationHelper registration
 
         /// <summary>
@@ -259,6 +191,7 @@ namespace Pineable
                 this.Frame.BackStack.RemoveAt(0);
 
             }
+
             //objUsuarioLogueado.Id = e.Parameter as string;
             verificarConexion();
 
@@ -308,12 +241,9 @@ namespace Pineable
             }
         }
 
-        private async void OptionsNew(object sender, TappedRoutedEventArgs e)
+        private void OptionsNew(object sender, TappedRoutedEventArgs e)
         {
-
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-
-
         }
 
 
@@ -325,6 +255,16 @@ namespace Pineable
         private void EditNew(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void grdvAreas_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Category objCategory = e.ClickedItem as Category;
+
+            if (!this.Frame.Navigate(typeof(NewsCategory), objCategory))
+            {
+                throw new Exception("Failed to create initial page");
+            }
         }
     }
 }
