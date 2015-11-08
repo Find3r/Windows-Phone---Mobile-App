@@ -1,4 +1,5 @@
-﻿using Pineable.Common;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using Pineable.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,11 @@ namespace Pineable
     {
         private TransitionCollection transitions;
         public static bool NetworkAvailable = true;
+
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            "https://wantedapp.azure-mobile.net/",
+            "MIqlLCMyhKNIonsgsNuFlpBXzqqNWj11"
+        );
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

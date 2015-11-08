@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,19 @@ namespace Pineable.Model
 {
     public class NewCustom : New
     {
+        [JsonProperty(PropertyName = "Column13")]
         public string UserName { get; set; }
 
+        [JsonProperty(PropertyName = "Column14")]
         public string UserPictureURL { get; set; }
 
+        [JsonProperty(PropertyName = "Column15")]
         public string NameZone { get; set; }
 
+        [JsonProperty(PropertyName = "Column16")]
         public int QuantityComments { get; set; }
 
+        [JsonProperty(PropertyName = "estado_seguimiento")]
         public bool StatusFollow { get; set; }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,33 +9,34 @@ namespace Pineable.Model
 {
     public class User
     {
-        //[JsonProperty("id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        //[JsonProperty("nombre")]
+        [JsonProperty(PropertyName = "nombre")]
         public string Name { get; set; }
 
-        //[JsonProperty("primerapellido")]
+        [JsonProperty(PropertyName = "primerapellido")]
         public string FirstLastName { get; set; }
 
-        //[JsonProperty("segundoapellido")]
+        [JsonProperty(PropertyName = "segundoapellido")]
         public string SecondLastName { get; set; }
 
+        [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
+        [JsonProperty(PropertyName = "telefonomovil")]
         public string PhoneNumber { get; set; }
 
-
+        [JsonProperty(PropertyName = "telefonohogar")]
         public string HomePhone { get; set; }
 
-
-        //[JsonProperty("urlimagen")]
+        [JsonProperty(PropertyName = "urlimagen")]
         public string PictureUrl {get; set; }
 
-        //[JsonProperty("cover_picture")]
+        [JsonProperty(PropertyName = "cover_picture")]
         public string CoverPicture { get; set; }
 
-        //[JsonProperty("idpais")]
+        [JsonProperty(PropertyName = "idpais")]
         public string IdCountry { get; set; }
     }
 }
