@@ -173,7 +173,7 @@ namespace Pineable.View
 
         private void Comment(object sender, TappedRoutedEventArgs e)
         {
-            if (!this.Frame.Navigate(typeof(View.NewDetail)))
+            if (!this.Frame.Navigate(typeof(View.Comments),OBJ_NOTICIA))
             {
                 throw new Exception("Failed to create initial page");
             }

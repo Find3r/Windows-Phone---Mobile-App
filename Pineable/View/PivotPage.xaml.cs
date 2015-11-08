@@ -28,7 +28,7 @@ namespace Pineable
     public sealed partial class PivotPage : Page
     {
         
-        User objUsuarioLogueado;
+        public User objUsuarioLogueado;
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
@@ -81,6 +81,8 @@ namespace Pineable
             objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
             objUsuarioLogueado.CoverPicture = "ms-appx:///Assets/Hawaiio.jpg";
 
+            lstvUserPosts.DataContext = objUsuarioLogueado;
+
 
             string descripcion = "Bacon ipsum dolor amet swine ham hock drumstick tail. Meatloaf jowl andouille jerky salami pork belly alcatra frankfurter prosciutto kevin.Tongue corned beef kielbasa salami t-bone, rump shoulder meatball pork loin cupim. Andouille ham flank pork shankle ham hock short loin rump salami tenderloin biltong." +
 
@@ -106,9 +108,9 @@ namespace Pineable
 
             }
 
-
-            txtNombreUsuario.Text = objUsuarioLogueado.Name;
-            txtDireccionUsuario.Text = "Costa Rica";
+           
+            //txtNombreUsuario.Text = objUsuarioLogueado.Name;
+            //txtDireccionUsuario.Text = "Costa Rica";
 
             List<Category> lstCategorias = new List<Category>();
             for (int i = 0; i < 5; i++)
@@ -143,12 +145,12 @@ namespace Pineable
 
             if (lstNoticias.Count == 0)
             {
-                txtComentarios.Visibility = Visibility.Visible;
-                txtComentarios.Text = "El usuario aún no tiene reportes";
+                //txtComentarios.Visibility = Visibility.Visible;
+                //txtComentarios.Text = "El usuario aún no tiene reportes";
             }
             else
             {
-                txtComentarios.Visibility = Visibility.Collapsed;
+                //txtComentarios.Visibility = Visibility.Collapsed;
 
             }
             lstvUserPosts.ItemsSource = lstNoticias;
@@ -274,11 +276,6 @@ namespace Pineable
 
             objNoticiaAux = e.ClickedItem as NewCustom;
    
-
-        }
-
-        private void lstvUserPosts_ItemClick(object sender, ItemClickEventArgs e)
-        {
 
         }
 
