@@ -238,7 +238,7 @@ namespace Pineable
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-
+            verificarConexion();
         }
 
         private void NavigateUserProfile(object sender, TappedRoutedEventArgs e)

@@ -151,6 +151,11 @@ namespace Pineable.View
             
         }
 
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            verificarConexion();
+        }
+
         private void NavigateUserProfile(object sender, TappedRoutedEventArgs e)
         {
             if (OBJ_NOTICIA != null)

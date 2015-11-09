@@ -137,6 +137,8 @@
     
     <Page.BottomAppBar >
         <CommandBar Background="#ff80a51e">
+
+            <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
             <AppBarButton x:Name="btnAddComment" Icon="Message" Label="Comentar" Click="btnAddComment_Click" />
         </CommandBar>
     </Page.BottomAppBar>
