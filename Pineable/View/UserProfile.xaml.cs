@@ -78,6 +78,7 @@ namespace Pineable.View
                 await info.ShowAsync();
                 cargarDatosOffline();
             }
+
         }
 
         private void cargarDatosOffline()
