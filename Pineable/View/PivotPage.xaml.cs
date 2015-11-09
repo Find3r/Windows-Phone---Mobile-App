@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
 using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -29,8 +30,7 @@ namespace Pineable
 {
     public sealed partial class PivotPage : Page
     {
-        
-        public Usuario objUsuarioLogueado;
+
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
@@ -40,7 +40,7 @@ namespace Pineable
         public PivotPage()
         {
             this.InitializeComponent();
-            objUsuarioLogueado = new Usuario();
+ 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
@@ -80,13 +80,7 @@ namespace Pineable
           
             IMobileServiceTable<Notificacionusuario> notificationsTable = App.MobileService.GetTable<Notificacionusuario>();
 
-            objUsuarioLogueado.Id = "1209577962402395";
-            objUsuarioLogueado.IdCountry = "1";
-            objUsuarioLogueado.Name = "Carlos Castro Brenes";
-            objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
-            objUsuarioLogueado.CoverPicture = "ms-appx:///Assets/Hawaiio.jpg";
-
-            lstvUserPosts.DataContext = objUsuarioLogueado;
+            lstvUserPosts.DataContext = App.objUsuarioLogueado;
 
             // se cargan las últimas noticias
             IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
@@ -97,12 +91,12 @@ namespace Pineable
             grdvAreas.ItemsSource = lstCategorias;
 
             // notificaciones
-            IEnumerable<Notificacionusuario> lstNotifications = await notificationsTable.Where(e => e.IdUser == objUsuarioLogueado.Id).OrderBy(e => e.DateCreated).ToEnumerableAsync();
+            IEnumerable<Notificacionusuario> lstNotifications = await notificationsTable.Where(e => e.IdUser == App.objUsuarioLogueado.Id).OrderBy(e => e.DateCreated).ToEnumerableAsync();
 
             lstvNotificaciones.ItemsSource = lstNotifications;
 
             // se cargan las noticias del usuario
-            IEnumerable<NewCustom> lstUserPosts = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", objUsuarioLogueado.Id } });
+            IEnumerable<NewCustom> lstUserPosts = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
 
             /*
             if (lstNoticias.Count == 0)
@@ -135,13 +129,13 @@ namespace Pineable
 
         private void cargarDatosOffline()
         {
-            objUsuarioLogueado.Id = "1";
-            objUsuarioLogueado.IdCountry = "1";
-            objUsuarioLogueado.Name = "Carlos Castro Brenes";
-            objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
-            objUsuarioLogueado.CoverPicture = "ms-appx:///Assets/Hawaiio.jpg";
+            App.objUsuarioLogueado.Id = "1";
+            App.objUsuarioLogueado.IdCountry = "1";
+            App.objUsuarioLogueado.Name = "Carlos Castro Brenes";
+            App.objUsuarioLogueado.PictureUrl = "ms-appx:///Assets/user.png";
+            App.objUsuarioLogueado.CoverPicture = "ms-appx:///Assets/Hawaiio.jpg";
 
-            lstvUserPosts.DataContext = objUsuarioLogueado;
+            lstvUserPosts.DataContext = App.objUsuarioLogueado;
 
 
             string descripcion = "Bacon ipsum dolor amet swine ham hock drumstick tail. Meatloaf jowl andouille jerky salami pork belly alcatra frankfurter prosciutto kevin.Tongue corned beef kielbasa salami t-bone, rump shoulder meatball pork loin cupim. Andouille ham flank pork shankle ham hock short loin rump salami tenderloin biltong." +
@@ -225,17 +219,59 @@ namespace Pineable
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            objUsuarioLogueado = new Usuario();
-
+           
             if (this.Frame.CanGoBack)
             {
                 this.Frame.BackStack.RemoveAt(0);
 
             }
 
-            //objUsuarioLogueado.Id = e.Parameter as string;
-            verificarConexion();
+            App.objUsuarioLogueado.Id = e.Parameter as string;
+            if (App.objUsuarioLogueado.Id != null)
+            {
+                loadUserInformation();
+            }
 
+            verificarConexion();
+        }
+
+        private async void loadUserInformation()
+        {
+            // verificamos si no tiene nada asignado
+            if (App.objUsuarioLogueado.Name == null)
+            {
+                // se consulta la api   
+                FacebookUser facebookUser = await App.MobileService.InvokeApiAsync<FacebookUser>("userlogin", HttpMethod.Get, null);
+
+                // establecemos nuestro objeto usuario que utilizaremos
+                App.objUsuarioLogueado.Name = facebookUser.Name;
+                App.objUsuarioLogueado.PictureUrl = "http://graph.facebook.com/" + facebookUser.Id + "/picture?type=large";
+                
+                if (facebookUser.PictureCoverURL.PictureUrl == null)
+                {
+                    App.objUsuarioLogueado.CoverPicture = "https://wanted.blob.core.windows.net/img/Hakuna_Matata opacidad.jpg";
+                }
+                else
+                {
+                    App.objUsuarioLogueado.CoverPicture = facebookUser.PictureCoverURL.PictureUrl;
+                }
+
+                // obtenemos referencia a la tabla usuarios
+                IMobileServiceTable <Usuario> tableUsuario = App.MobileService.GetTable<Model.Usuario>();
+                try
+                {
+                    Usuario objUsuario = await tableUsuario.LookupAsync(App.objUsuarioLogueado.Id);
+
+                    App.objUsuarioLogueado = objUsuario;
+                }
+                catch (Exception a)
+                {
+
+                    // si es así entonces lo insertamos en la base de datos
+                    await tableUsuario.InsertAsync(App.objUsuarioLogueado);
+                }
+            }
+           
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

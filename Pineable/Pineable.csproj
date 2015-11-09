@@ -80,6 +80,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="View\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NewsCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +119,9 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
     <Compile Include="Helper\Helper.cs" />
+    <Compile Include="View\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewsCategory.xaml.cs">
       <DependentUpon>NewsCategory.xaml</DependentUpon>
     </Compile>
@@ -155,8 +162,10 @@
     <Content Include="Assets\calendar.png" />
     <Content Include="Assets\car.png" />
     <Content Include="Assets\comment.png" />
+    <Content Include="Assets\fondo.png" />
     <Content Include="Assets\found.png" />
     <Content Include="Assets\Hawaiio.jpg" />
+    <Content Include="Assets\letras.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\lost.png" />
     <Content Include="Assets\news_bar.png" />

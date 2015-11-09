@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="Pineable.View.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pineable.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="padre" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/fondo.png"/>
+        </Grid.Background>
+        <ProgressBar
+            Name="progressBar"
+            Foreground="White"
+            Visibility="Collapsed"
+            IsIndeterminate="True"/>
+        <Image
+            Source="ms-appx:///Assets/letras.png"/>
+
+        <TextBlock
+            Text="La mejor forma de rastrear tus pertenencias" 
+            TextWrapping="Wrap"
+            FontSize="25"
+            FontWeight="Bold"
+            TextAlignment="Center"
+            Margin="10,246,10,341"/>
+
+        <TextBlock
+            Text="Iniciar sesión" 
+            FontSize="25"
+            TextAlignment="Center"
+            Margin="10,475,10,112"/>
+
+        <Button 
+            x:Name="btnFacebook" 
+            Content="Facebook" 
+            Margin="10,510,0,73"
+            Width="380" 
+            Tapped="btnFacebook_Tapped"/>
+
+    </Grid>
+</Page>

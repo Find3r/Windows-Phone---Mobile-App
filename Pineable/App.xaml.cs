@@ -1,5 +1,7 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using Pineable.Common;
+using Pineable.Model;
+using Pineable.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.Connectivity;
 using Windows.Phone.UI.Input;
+using Windows.Security.Credentials;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,7 +34,9 @@ namespace Pineable
     {
         private TransitionCollection transitions;
         public static bool NetworkAvailable = true;
+        private MobileServiceUser user;
 
+        public static Usuario objUsuarioLogueado = new Usuario();
         public static MobileServiceClient MobileService = new MobileServiceClient(
             "https://wantedapp.azure-mobile.net/",
             "MIqlLCMyhKNIonsgsNuFlpBXzqqNWj11"
@@ -73,7 +78,20 @@ namespace Pineable
                 e.Handled = true;
             }
         }
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            // Windows Phone 8.1 requires you to handle the respose from the WebAuthenticationBroker.
+#if WINDOWS_PHONE_APP
+            if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
+            {
+                // Completes the sign-in process started by LoginAsync.
+                // Change 'MobileService' to the name of your MobileServiceClient instance. 
+                App.MobileService.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+            }
+#endif
 
+            base.OnActivated(args);
+        }
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display
@@ -143,14 +161,64 @@ namespace Pineable
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter.
-                if (!rootFrame.Navigate(typeof(PivotPage), e.Arguments))
+
+                // verificamos si existe la credencial almacenada
+                if (Authenticate())
                 {
-                    throw new Exception("Failed to create initial page");
+                    // si es así enviamos al pivot
+                    if (!rootFrame.Navigate(typeof(PivotPage), Helper.Helper.GetUserId(user.UserId)))
+                    {
+                        //throw new Exception("Failed to create initial page");
+                    }
+                }
+                else
+                {
+                    // en caso que no existe entonces enviamos a la ventana de login
+                    if (!rootFrame.Navigate(typeof(Login)))
+                    {
+                        //throw new Exception("Failed to create initial page");
+                    }
                 }
             }
 
             // Ensure the current window is active.
             Window.Current.Activate();
+        }
+
+        private bool Authenticate()
+        {
+            // Use the PasswordVault to securely store and access credentials.
+            PasswordVault vault = new PasswordVault();
+            PasswordCredential credential = null;
+
+
+            try
+            {
+                // Try to get an existing credential from the vault.
+                credential = vault.FindAllByResource("Facebook").FirstOrDefault();
+            }
+            catch (Exception a)
+            {
+                // When there is no matching resource an error occurs, which we ignore.
+            }
+
+            if (credential != null)
+            {
+                // Create a user from the stored credentials.
+                user = new MobileServiceUser(credential.UserName);
+                credential.RetrievePassword();
+                user.MobileServiceAuthenticationToken = credential.Password;
+
+                // Set the user from the stored credentials.
+                MobileService.CurrentUser = user;
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         /// <summary>

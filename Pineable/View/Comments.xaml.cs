@@ -1,4 +1,5 @@
-﻿using Pineable.Model;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using Pineable.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -96,39 +97,58 @@ namespace Pineable.View
             progressRing.IsActive = false;
         }
 
-        private void btnAddComment_Click(object sender, RoutedEventArgs e)
+        private async void btnAddComment_Click(object sender, RoutedEventArgs e)
         {
-            // mostramos la barra de carga
-            progressRing.IsActive = true;
+            // se verifica si hay contenido en el textblock
+            if (txtComment.Text.Trim().Equals(""))
+            {
+                MessageDialog info = new MessageDialog("Debe ingresar contenido en el comentario");
+                await info.ShowAsync();
+            }
+            else
+            {
+                IMobileServiceTable<Comentario> commentTable = App.MobileService.GetTable<Comentario>();
 
-            //IMobileServiceTable<Comentario> tableComentario = App.MobileService.GetTable<Comentario>();
-            Comment objComentarioNuevo = new Comment();
+                // mostramos la barra de carga
+                progressRing.IsActive = true;
 
-            // establecemos el id de la noticia
-            objComentarioNuevo.IdNew = OBJ_NOTICIA.Id;
+                //IMobileServiceTable<Comentario> tableComentario = App.MobileService.GetTable<Comentario>();
+                Comentario objComentarioNuevo = new Comentario();
 
-            // establecemos el id del usuario, en este caso obtenemos este id mediante el que se encuentra autenticado
-            //objComentarioNuevo.IdUser = Helper.Helper.GetUserId(App.MobileService.CurrentUser.UserId);
-            objComentarioNuevo.IdUser = "1";
+                // establecemos el id de la noticia
+                objComentarioNuevo.IdNew = OBJ_NOTICIA.Id;
 
-            // establecemos la descripción
-            objComentarioNuevo.Description = txtComment.Text.Trim();
+                // establecemos el id del usuario, en este caso obtenemos este id mediante el que se encuentra autenticado
+                objComentarioNuevo.IdUser = App.objUsuarioLogueado.Id;
 
-            // limpiamos el textbox
-            txtComment.Text = "";
+                // establecemos la descripción
+                objComentarioNuevo.Description = txtComment.Text.Trim();
 
-            // obtenmos la fecha
-            objComentarioNuevo.Date = DateTime.Now;
 
-            // agregamos el comentario
-            //await tableComentario.InsertAsync(objComentarioNuevo);
+                // obtenmos la fecha
+                objComentarioNuevo.Date = DateTime.Now;
+
+                // agregamos el comentario
+                try
+                {
+                    await commentTable.InsertAsync(objComentarioNuevo);
+
+                    // limpiamos el textbox
+                    txtComment.Text = "";
+
+                    verificarConexion();
+                }
+                catch (Exception)
+                {
+                    MessageDialog info = new MessageDialog("Vaya ha ocurrido un error al agregar el comentario");
+                    await info.ShowAsync();
+
+                }
+
+                // ocultamos la barra de carga
+                progressRing.IsActive = false;
+            }
             
-
-            // recargamos
-            //CargarComentarios();
-
-            // ocultamos la barra de carga
-            progressRing.IsActive = false;
         }
 
         private void NavigateUserProfile(object sender, TappedRoutedEventArgs e)
