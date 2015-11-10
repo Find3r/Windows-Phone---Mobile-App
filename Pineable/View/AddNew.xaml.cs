@@ -97,6 +97,8 @@ namespace Pineable.View
                 MessageDialog info = new MessageDialog("Noticia agregada");
                 await info.ShowAsync();
 
+                // indicamos que debe actualizar
+                App.REFRESH_ITEMS = true;
 
                 if (!this.Frame.Navigate(typeof(PivotPage)))
                 {

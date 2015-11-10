@@ -37,6 +37,7 @@ namespace Pineable
         private MobileServiceUser user;
 
         public static bool FIRST_TIME = true;
+        public static bool REFRESH_ITEMS = true;
 
         public static Usuario objUsuarioLogueado = new Usuario();
         public static MobileServiceClient MobileService = new MobileServiceClient(

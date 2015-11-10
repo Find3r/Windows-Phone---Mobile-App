@@ -245,9 +245,16 @@ namespace Pineable
                 {
                     App.objUsuarioLogueado.Id = e.Parameter as string;
                     loadUserInformation();
+
+                    
                 }
 
-                verificarConexion();
+                if (App.REFRESH_ITEMS)
+                {
+                    verificarConexion();
+                    App.REFRESH_ITEMS = false;
+                }
+               
             }
             catch (Exception a)
             {
