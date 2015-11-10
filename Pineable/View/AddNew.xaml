@@ -1,0 +1,159 @@
+﻿<Page
+    x:Class="Pineable.View.AddNew"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pineable.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer Background="#e8e8e8">
+        <StackPanel
+            Orientation="Vertical"
+            Name="grid"
+            Background="#FFF"
+            Margin="10,10,10,10">
+
+            <TextBlock              
+                Grid.Row="0"
+                Text="Nombre del reporte" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <TextBox 
+                x:Name="txtNombre" 
+                Grid.Row="1"
+                TextWrapping="Wrap" 
+                Margin="10"
+                MaxHeight="150"
+                PlaceholderText="Ingrese el nombre  " />
+
+            <TextBlock              
+                Grid.Row="0"
+                Text="Descripción" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <TextBox 
+                x:Name="txtDescripcion" 
+                Grid.Row="1"
+                TextWrapping="Wrap" 
+                Margin="10"
+                MaxHeight="150"
+                PlaceholderText="Ingrese la descripción" />
+
+            <TextBlock              
+                Grid.Row="2"
+                Text="Seleccione una imagen" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <Image
+                Name="imgvSeleccionarImagen"
+                Grid.Row="3" 
+                Width="150"
+                Height="100" Source="ms-appx:///Assets/add_image.png"
+                Tapped="imgvSeleccionarImagen_Tapped"
+               />
+
+            <TextBlock      
+                Text="Lugar" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <ComboBox 
+                x:Name="cboLugar" 
+                Grid.Row="4" 
+                Background="#ff80a51e"
+                Width="{Binding ActualWidth, ElementName=grid}"
+                Margin="10,0">
+                <ComboBoxItem Content="San José"/>
+                <ComboBoxItem Content="Alajuela"/>
+                <ComboBoxItem Content="Cartago"/>
+                <ComboBoxItem Content="Heredia"/>
+                <ComboBoxItem Content="Guanacaste"/>
+                <ComboBoxItem Content="Puntarenas"/>
+                <ComboBoxItem Content="Limón"/>
+            </ComboBox>
+
+            <TextBlock      
+                Text="Fecha" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+            
+            <DatePicker
+                Name="dtpFecha"
+                Margin="10,0"
+                Background="#ff80a51e"/>
+
+
+            <TextBlock      
+                Text="Categoría" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <ComboBox 
+                x:Name="cboCategorias" 
+                Grid.Row="4" 
+                Background="#ff80a51e"
+                Width="{Binding ActualWidth, ElementName=grid}"
+                Margin="10,0">
+                <ComboBoxItem Content="Personas"/>
+                <ComboBoxItem Content="Vehículos"/>
+                <ComboBoxItem Content="Mascotas"/>
+                <ComboBoxItem Content="Otros"/>
+            </ComboBox>
+
+            <TextBlock      
+                Text="Estado" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <ComboBox 
+                x:Name="cboEstado" 
+                Grid.Row="4" 
+                Background="#ff80a51e"
+                Width="{Binding ActualWidth, ElementName=grid}"
+                Margin="10,0"
+                IsEnabled="False">
+                <ComboBoxItem Content="Desaparecid@" />
+                <ComboBoxItem Content="Encontrad@"/>
+            </ComboBox>
+
+            <Button
+                Name="btnAgregarNoticia"
+                Background="#ff80a51e"
+                Grid.Row="5" 
+                Width="{Binding ActualWidth, ElementName=grid}"
+                Content="Agregar"
+                Margin="10"
+                Tapped="btnAgregarNoticia_Tapped"/>
+            
+            
+
+        </StackPanel>
+
+    </ScrollViewer>
+</Page>

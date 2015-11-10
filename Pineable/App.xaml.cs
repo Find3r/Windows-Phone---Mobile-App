@@ -36,6 +36,8 @@ namespace Pineable
         public static bool NetworkAvailable = true;
         private MobileServiceUser user;
 
+        public static bool FIRST_TIME = true;
+
         public static Usuario objUsuarioLogueado = new Usuario();
         public static MobileServiceClient MobileService = new MobileServiceClient(
             "https://wantedapp.azure-mobile.net/",

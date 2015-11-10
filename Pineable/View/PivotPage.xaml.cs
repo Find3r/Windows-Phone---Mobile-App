@@ -238,13 +238,23 @@ namespace Pineable
 
             }
 
-            App.objUsuarioLogueado.Id = e.Parameter as string;
-            if (App.objUsuarioLogueado.Id != null)
+            try
             {
-                loadUserInformation();
-            }
+                
+                if (App.FIRST_TIME)
+                {
+                    App.objUsuarioLogueado.Id = e.Parameter as string;
+                    loadUserInformation();
+                }
 
-            verificarConexion();
+                verificarConexion();
+            }
+            catch (Exception a)
+            {
+
+               
+            }
+            
         }
 
         private async void loadUserInformation()
@@ -252,6 +262,8 @@ namespace Pineable
             // verificamos si no tiene nada asignado
             if (App.objUsuarioLogueado.Name == null)
             {
+                App.FIRST_TIME = false;
+
                 // se consulta la api   
                 FacebookUser facebookUser = await App.MobileService.InvokeApiAsync<FacebookUser>("userlogin", HttpMethod.Get, null);
 
@@ -379,6 +391,14 @@ namespace Pineable
                 {
                     throw new Exception("Failed to create initial page");
                 }
+            }
+        }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+            if (!this.Frame.Navigate(typeof(View.AddNew)))
+            {
+                throw new Exception("Failed to create initial page");
             }
         }
     }

@@ -601,6 +601,7 @@
 
             <CommandBar.PrimaryCommands>
 
+                <AppBarButton x:Name="btnAddNew" Label="Agregar" Icon="Add" Click="btnAddNew_Click" />
                 <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
                 
             </CommandBar.PrimaryCommands>

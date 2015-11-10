@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pineable.Model
 {
-    public class New
+    public class Noticia
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
