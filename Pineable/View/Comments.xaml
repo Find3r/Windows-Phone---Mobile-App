@@ -105,6 +105,35 @@
             Background="Transparent"
             ScrollViewer.VerticalScrollBarVisibility="Visible" />
 
+        <Grid
+            Grid.Row="1"
+            Name="grdErrorComentarios"
+            VerticalAlignment="Center"
+            Visibility="Collapsed">
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Image 
+                Name="imgErrorComentarios"
+                Width="100"
+                Height="100"
+                Source="ms-appx:///Assets/sad.png" />
+
+            <TextBlock
+                 Grid.Row="1"
+                 Name="txtErrorComentarios"
+                 FontSize="20"
+                 Text="¡Vaya parece que aún no hay datos para mostrar!"
+                 Foreground="#212121"
+                 TextAlignment="Center"
+                 TextWrapping="Wrap"
+                 Margin="0,20"/>
+
+        </Grid>
+
         <!-- Title Panel -->
         <StackPanel 
             x:Name="lv" 

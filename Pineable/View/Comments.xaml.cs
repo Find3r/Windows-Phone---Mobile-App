@@ -80,6 +80,16 @@ namespace Pineable.View
             lstvComentarios.ItemsSource = lstComments;
 
             progressRing.IsActive = false;
+
+            if(lstComments.Count() == 0)
+            {
+                grdErrorComentarios.Visibility = Visibility.Visible;
+                
+            }
+            else
+            {
+                grdErrorComentarios.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void cargarDatosOffline()
