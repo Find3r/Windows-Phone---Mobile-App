@@ -83,46 +83,62 @@ namespace Pineable
             lstvUserPosts.DataContext = App.objUsuarioLogueado;
 
             // se cargan las últimas noticias
-            IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
+            IEnumerable<NewCustom> collectionLastNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
+            lstvUltimasNoticias.ItemsSource = collectionLastNews;
 
             // se cargan las categorías
-            IEnumerable<Categoria> lstCategorias = await categoryTable.OrderBy(e => e.Name).ToEnumerableAsync();
-
-            grdvAreas.ItemsSource = lstCategorias;
+            IEnumerable<Categoria> collectionCategories = await categoryTable.OrderBy(e => e.Name).ToEnumerableAsync();
+            grdvAreas.ItemsSource = collectionCategories;
 
             // notificaciones
-            IEnumerable<Notificacionusuario> lstNotifications = await notificationsTable.Where(e => e.IdUser == App.objUsuarioLogueado.Id).OrderBy(e => e.DateCreated).ToEnumerableAsync();
-
-            lstvNotificaciones.ItemsSource = lstNotifications;
+            IEnumerable<Notificacionusuario> collectionNotifications = await notificationsTable.Where(e => e.IdUser == App.objUsuarioLogueado.Id).OrderBy(e => e.DateCreated).ToEnumerableAsync();
+            lstvNotificaciones.ItemsSource = collectionNotifications;
 
             // se cargan las noticias del usuario
-            IEnumerable<NewCustom> lstUserPosts = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
+            IEnumerable<NewCustom> collectionUserNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
+            lstvUserPosts.ItemsSource = collectionUserNews;
+          
+            // se verifica si se tiene que desplegar el layout con el mensaje de error
 
-            /*
-            if (lstNoticias.Count == 0)
+            // últimas noticias
+            if (collectionLastNews.Count() == 0)
             {
-                txtMiSeguimiento.Visibility = Visibility.Visible;
-                txtMiSeguimiento.Text = "Aún no sigues ninguna noticia";
+                grdErrorLastNews.Visibility = Visibility.Visible;
             }
             else
             {
-                txtMiSeguimiento.Visibility = Visibility.Collapsed;
-
+                grdErrorLastNews.Visibility = Visibility.Collapsed;
             }
 
-            if (lstNoticias.Count == 0)
+            // categorías
+            if (collectionCategories.Count() == 0)
             {
-                //txtComentarios.Visibility = Visibility.Visible;
-                //txtComentarios.Text = "El usuario aún no tiene reportes";
+                grdErrorCategories.Visibility = Visibility.Visible;
             }
             else
             {
-                //txtComentarios.Visibility = Visibility.Collapsed;
-
+                grdErrorCategories.Visibility = Visibility.Collapsed;
             }
-            */
-            lstvUserPosts.ItemsSource = lstUserPosts;
-            lstvUltimasNoticias.ItemsSource = lstNoticias;
+
+            // notificaciones
+            if (collectionNotifications.Count() == 0)
+            {
+                grdErrorNotifications.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                grdErrorNotifications.Visibility = Visibility.Collapsed;
+            }
+
+            // mi perfil
+            if (collectionUserNews.Count() == 0)
+            {
+                grdErrorMyProfile.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                grdErrorMyProfile.Visibility = Visibility.Collapsed;
+            }
 
             progressRing.IsActive = false;
         }
@@ -161,10 +177,6 @@ namespace Pineable
                 lstNoticias.Add(new NewCustom() { Id = "1", PictureURL = "ms-appx:///Assets/alm.png", Description = descripcion, DateLost = DateTime.Now, IdCategory = "1", IdStatus = estado.ToString(), IdZone = "1", IdUser = "1", Name = "Noticia " + i.ToString(), NameZone = "Puriscal", QuantityComments = i, UserName = i.ToString(),UserPictureURL = "ms-appx:///Assets/user.png" });
 
             }
-
-           
-            //txtNombreUsuario.Text = objUsuarioLogueado.Name;
-            //txtDireccionUsuario.Text = "Costa Rica";
 
             List<Categoria> lstCategorias = new List<Categoria>();
             for (int i = 0; i < 5; i++)

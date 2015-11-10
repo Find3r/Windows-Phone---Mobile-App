@@ -145,8 +145,17 @@ namespace Pineable
             txtTitle.Text = OBJ_CATEGORY.Name;
 
             // se cargan las noticias de una categoría
-            IEnumerable<NewCustom> lstNoticias = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_category", HttpMethod.Get, new Dictionary<string,string> { { "id", OBJ_CATEGORY.Id } });
-            lstvUltimasNoticias.ItemsSource = lstNoticias;
+            IEnumerable<NewCustom> collectionCategoryNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_category", HttpMethod.Get, new Dictionary<string,string> { { "id", OBJ_CATEGORY.Id } });
+            lstvUltimasNoticias.ItemsSource = collectionCategoryNews;
+
+            if (collectionCategoryNews.Count() == 0)
+            {
+                grdErrorCategoryNews.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                grdErrorCategoryNews.Visibility = Visibility.Collapsed;
+            }
 
             progressRing.IsActive = false;
         }

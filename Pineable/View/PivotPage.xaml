@@ -387,7 +387,35 @@
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True"
                         ItemClick="lstvUltimasNoticias_ItemClick"
                         ItemTemplate="{StaticResource itemNoticiaPersonalizada}" />
-                    
+
+                    <Grid
+                        Name="grdErrorLastNews"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image 
+                            Name="imgErrorLastNews"
+                            Width="100"
+                            Height="100"
+                            Source="ms-appx:///Assets/sad.png" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Name="txtErrorLastNews"
+                            FontSize="20"
+                            Text="¡Vaya parece que aún no hay datos para mostrar!"
+                            Foreground="#212121"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="0,20"/>
+
+                    </Grid>
+
                 </Grid>
                 
             </PivotItem>
@@ -412,7 +440,35 @@
                         ItemTemplate="{StaticResource itemListaAreas}" 
                         ItemClick="grdvAreas_ItemClick" 
                         IsItemClickEnabled="True" />
-                    
+
+                    <Grid
+                        Name="grdErrorCategories"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image 
+                            Name="imgErrorCategories"
+                            Width="100"
+                            Height="100"
+                            Source="ms-appx:///Assets/sad.png" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Name="txtErrorCategories"
+                            FontSize="20"
+                            Text="¡Vaya parece que aún no hay datos para mostrar!"
+                            Foreground="#212121"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="0,20"/>
+
+                    </Grid>
+
                 </Grid>
                 
             </PivotItem>
@@ -438,6 +494,34 @@
                         ItemClick="NavigateCommentsNew"
                         ItemTemplate="{StaticResource itemNotificacion}"  />
 
+                    <Grid
+                        Name="grdErrorNotifications"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                    
+                        <Image 
+                            Name="imgErrorNotifications"
+                            Width="100"
+                            Height="100"
+                            Source="ms-appx:///Assets/sad.png" />
+                    
+                        <TextBlock
+                            Grid.Row="1"
+                            Name="txtErrorNotifications"
+                            FontSize="20"
+                            Text="¡Vaya parece que aún no hay datos para mostrar!"
+                            Foreground="#212121"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="0,20"/>
+
+                    </Grid>
+
                 </Grid>
 
             </PivotItem>
@@ -449,12 +533,51 @@
                 Margin="19,14.5,19,0">
                 <!--Double line list no text wrapping-->
 
-                <ListView
-                    Name="lstvUserPosts"
-                    HeaderTemplate="{StaticResource itemHeaderPerfil}"
-                    ItemTemplate="{StaticResource itemNoticiaPersonalizada}"
-                    IsItemClickEnabled="True"
-                    ItemClick="lstvUltimasNoticias_ItemClick"/>
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView
+                        Name="lstvUserPosts"
+                        HeaderTemplate="{StaticResource itemHeaderPerfil}"
+                        ItemTemplate="{StaticResource itemNoticiaPersonalizada}"
+                        IsItemClickEnabled="True"
+                        ItemClick="lstvUltimasNoticias_ItemClick"/>
+
+
+                    <Grid
+                        Name="grdErrorMyProfile"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image 
+                            Name="imgErrorMyProfile"
+                            Width="100"
+                            Height="100"
+                            Source="ms-appx:///Assets/sad.png" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Name="txtErrorMyProfile"
+                            FontSize="20"
+                            Text="¡Vaya parece que aún no hay datos para mostrar!"
+                            Foreground="#212121"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="0,20"/>
+
+                    </Grid>
+
+                </Grid>
 
             </PivotItem>
 

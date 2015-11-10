@@ -378,6 +378,35 @@
                     IsItemClickEnabled="True"
                     ItemClick="lstvUltimasNoticias_ItemClick"/>
 
+                <Grid
+                        Name="grdErrorProfile"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Image 
+                            Name="imgErrorProfile"
+                            Width="100"
+                            Height="100"
+                            Source="ms-appx:///Assets/sad.png" />
+
+                    <TextBlock
+                            Grid.Row="1"
+                            Name="txtErrorProfile"
+                            FontSize="20"
+                            Text="¡Vaya parece que aún no hay datos para mostrar!"
+                            Foreground="#212121"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="0,20"/>
+
+                </Grid>
+
+
             </Grid>
         </Grid>
 
