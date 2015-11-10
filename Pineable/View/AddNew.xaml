@@ -136,8 +136,7 @@
                 Grid.Row="4" 
                 Background="#ff80a51e"
                 Width="{Binding ActualWidth, ElementName=grid}"
-                Margin="10,0"
-                IsEnabled="False">
+                Margin="10,0">
                 <ComboBoxItem Content="Desaparecid@" />
                 <ComboBoxItem Content="Encontrad@"/>
             </ComboBox>

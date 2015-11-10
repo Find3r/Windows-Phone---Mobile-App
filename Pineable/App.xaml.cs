@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -33,7 +35,6 @@ namespace Pineable
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
-        public static bool NetworkAvailable = true;
         private MobileServiceUser user;
 
         public static bool FIRST_TIME = true;
@@ -56,17 +57,9 @@ namespace Pineable
 
 
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            NetworkInformation.NetworkStatusChanged += NetworkInformation_NetworkStatusChanged;
+            
         }
-
-        private void NetworkInformation_NetworkStatusChanged(object sender)
-        {
-            if (NetworkInformation.GetInternetConnectionProfile() == null)
-                NetworkAvailable = false;
-            else
-                NetworkAvailable = true;
-        }
-
+        
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             Frame frame = Window.Current.Content as Frame;
@@ -81,6 +74,13 @@ namespace Pineable
                 e.Handled = true;
             }
         }
+
+        public async static Task<bool> CheckInternetConnection()
+        {
+            return await Task.Run(() => NetworkInterface.GetIsNetworkAvailable());
+        }
+
+
         protected override void OnActivated(IActivatedEventArgs args)
         {
             // Windows Phone 8.1 requires you to handle the respose from the WebAuthenticationBroker.

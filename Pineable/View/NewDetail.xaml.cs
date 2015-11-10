@@ -118,7 +118,7 @@ namespace Pineable.View
         {
             cargarDatos();
 
-            if (App.NetworkAvailable)
+            if (await App.CheckInternetConnection())
             {
                 //Hay conexión a Internet
                 progressRing.IsActive = true;

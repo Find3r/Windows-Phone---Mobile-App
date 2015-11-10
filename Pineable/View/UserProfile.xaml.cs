@@ -62,7 +62,7 @@ namespace Pineable.View
         private async void verificarConexion()
         {
 
-            if (App.NetworkAvailable)
+            if (await App.CheckInternetConnection())
             {
                 //Hay conexión a Internet
                 progressRing.IsActive = true;

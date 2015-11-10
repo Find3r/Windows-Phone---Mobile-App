@@ -23,6 +23,8 @@ using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
 using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Net.NetworkInformation;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -49,13 +51,11 @@ namespace Pineable
 
         private async void verificarConexion()
         {
-           
           
-            if (App.NetworkAvailable)
+            if (await App.CheckInternetConnection())
             {
                 //Hay conexión a Internet
                 progressRing.IsActive = true;
-
                 lstvUserPosts.ItemsSource = null;
                 lstvUltimasNoticias.ItemsSource = null;
 
@@ -143,6 +143,7 @@ namespace Pineable
             progressRing.IsActive = false;
         }
 
+        #region offline
         private void cargarDatosOffline()
         {
             App.objUsuarioLogueado.Id = "1";
@@ -204,6 +205,7 @@ namespace Pineable
 
 
         }
+        #endregion
 
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
@@ -214,21 +216,7 @@ namespace Pineable
         }
 
         #region NavigationHelper registration
-
-        /// <summary>
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// <para>
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="NavigationHelper.LoadState"/>
-        /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-        /// </para>
-        /// </summary>
-        /// <param name="e">Provides data for navigation methods and event
-        /// handlers that cannot cancel the navigation request.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
            
@@ -240,19 +228,31 @@ namespace Pineable
 
             try
             {
-                
                 if (App.FIRST_TIME)
                 {
-                    App.objUsuarioLogueado.Id = e.Parameter as string;
-                    loadUserInformation();
+                    
+                    if (await App.CheckInternetConnection())
+                    {
+                        //Wifi or Cellular
+                        App.objUsuarioLogueado.Id = e.Parameter as string;
+                        loadUserInformation();
+                    }
+                    else
+                    {
+                        // No internet
+                        MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
+                        await info.ShowAsync();
 
+                    }
                     
                 }
 
                 if (App.REFRESH_ITEMS)
                 {
+                   
                     verificarConexion();
                     App.REFRESH_ITEMS = false;
+                    
                 }
                
             }
