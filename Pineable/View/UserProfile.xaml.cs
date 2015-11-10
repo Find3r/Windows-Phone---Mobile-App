@@ -132,9 +132,19 @@ namespace Pineable.View
             lstvUserPosts.DataContext = objUsuario;
 
             // se cargan las noticias del usuario
-            IEnumerable<NewCustom> lstUserPosts = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", objUsuario.Id } });
+            IEnumerable<NewCustom> collectionUserPosts = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", objUsuario.Id } });
 
-            lstvUserPosts.ItemsSource = lstUserPosts;
+            lstvUserPosts.ItemsSource = collectionUserPosts;
+
+            if (collectionUserPosts.Count() == 0)
+            {
+
+                grdErrorProfile.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                grdErrorProfile.Visibility = Visibility.Collapsed;
+            }
 
             progressRing.IsActive = false;
 
