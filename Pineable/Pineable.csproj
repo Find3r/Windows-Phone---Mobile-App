@@ -126,6 +126,9 @@
     <Compile Include="DataModel\SampleDataSource.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Model\CustomImage.cs" />
+    <Compile Include="Services\MobileServices\wantedapp\push.register.cs">
+      <ConnectedServiceReference>wantedapp</ConnectedServiceReference>
+    </Compile>
     <Compile Include="View\AddNew.xaml.cs">
       <DependentUpon>AddNew.xaml</DependentUpon>
     </Compile>

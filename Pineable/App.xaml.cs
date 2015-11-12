@@ -34,6 +34,9 @@ namespace Pineable
     /// </summary>
     public sealed partial class App : Application
     {
+        // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
+
+
         private TransitionCollection transitions;
         private MobileServiceUser user;
 
@@ -186,6 +189,8 @@ namespace Pineable
 
             // Ensure the current window is active.
             Window.Current.Activate();
+            // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
+            Pineable.wantedappPush.UploadChannel();
         }
 
         private bool Authenticate()
