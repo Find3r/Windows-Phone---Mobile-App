@@ -597,7 +597,7 @@
         <CommandBar 
             x:Uid="Green"
             x:Name="commandBar"
-            Background="{Binding}">
+            Background="#ff80a51e">
 
             <CommandBar.PrimaryCommands>
 
