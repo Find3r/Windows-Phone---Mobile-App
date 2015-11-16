@@ -67,7 +67,7 @@ namespace Pineable
                 //No hay conexión a Internet
                 MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
                 await info.ShowAsync();
-                cargarDatosOffline();
+                //cargarDatosOffline();
             }
             
         }

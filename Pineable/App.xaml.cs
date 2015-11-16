@@ -168,6 +168,8 @@ namespace Pineable
                 // configuring the new page by passing required information as a navigation
                 // parameter.
 
+                
+
                 // verificamos si existe la credencial almacenada
                 if (Authenticate())
                 {
@@ -190,7 +192,14 @@ namespace Pineable
             // Ensure the current window is active.
             Window.Current.Activate();
             // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
-            Pineable.wantedappPush.UploadChannel();
+
+            // se verifica la conexión a internet
+            if (await CheckInternetConnection())
+            {
+                // si hay entonces se intenta actualizar el canal de push notifications
+                await Pineable.wantedappPush.UploadChannel();
+            }
+           
         }
 
         private bool Authenticate()
@@ -198,12 +207,14 @@ namespace Pineable
             // Use the PasswordVault to securely store and access credentials.
             PasswordVault vault = new PasswordVault();
             PasswordCredential credential = null;
-
-
+            
             try
             {
                 // Try to get an existing credential from the vault.
-                credential = vault.FindAllByResource("Facebook").FirstOrDefault();
+                credential = vault.FindAllByResource("Facebook").First();
+
+                //vault.Remove(credential);
+                
             }
             catch (Exception a)
             {

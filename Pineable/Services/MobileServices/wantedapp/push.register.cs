@@ -13,10 +13,10 @@ namespace Pineable
 {
     internal class wantedappPush
     {
-        public async static void UploadChannel()
+        public async static Task UploadChannel()
         {
             var channel = await Windows.Networking.PushNotifications.PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-
+            channel.PushNotificationReceived += Channel_PushNotificationReceived;
             try
             {
                 List<string> tags = new List<string>();
@@ -24,6 +24,8 @@ namespace Pineable
                 tags.Add("All");
                 
                 await App.MobileService.GetPush().RegisterNativeAsync(channel.Uri, tags);    
+
+               
                 /*
                 await App.wantedappClient.InvokeApiAsync("notifyAllUsers",
                     new JObject(new JProperty("toast", "Sample Toast")));
@@ -33,6 +35,11 @@ namespace Pineable
             {
                 HandleRegisterException(exception);
             }
+        }
+
+        private static void Channel_PushNotificationReceived(Windows.Networking.PushNotifications.PushNotificationChannel sender, Windows.Networking.PushNotifications.PushNotificationReceivedEventArgs args)
+        {
+            
         }
 
         private static void HandleRegisterException(Exception exception)

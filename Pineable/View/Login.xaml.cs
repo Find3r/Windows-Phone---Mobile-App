@@ -96,6 +96,13 @@ namespace Pineable.View
                         credential = new PasswordCredential(PROVIDER,
                             user.UserId, user.MobileServiceAuthenticationToken);
                         vault.Add(credential);
+
+                        user = new MobileServiceUser(credential.UserName);
+                        credential.RetrievePassword();
+                        user.MobileServiceAuthenticationToken = credential.Password;
+
+                        // Set the user from the stored credentials.
+                        App.MobileService.CurrentUser = user;
                     }
                     catch (MobileServiceInvalidOperationException ex)
                     {
