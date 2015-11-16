@@ -60,7 +60,7 @@ namespace Pineable.View
         private async void btnAgregarNoticia_Tapped(object sender, TappedRoutedEventArgs e)
         {
             // se verifica si hay conexión a internet
-            if (!await App.CheckInternetConnection())
+            if (await App.CheckInternetConnection())
             {
                 string nombre = txtNombre.Text.Trim();
                 string descripcion = txtDescripcion.Text.Trim();

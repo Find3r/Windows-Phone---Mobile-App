@@ -54,6 +54,11 @@ namespace Pineable
           
             if (await App.CheckInternetConnection())
             {
+                grdErrorLastNews.Visibility = Visibility.Collapsed;
+                grdErrorCategories.Visibility = Visibility.Collapsed;
+                grdErrorNotifications.Visibility = Visibility.Collapsed;
+                lstvUserPosts.Visibility = Visibility.Visible;
+                grdErrorMyProfile.Visibility = Visibility.Collapsed;
                 //Hay conexión a Internet
                 progressRing.IsActive = true;
                 lstvUserPosts.ItemsSource = null;
@@ -68,6 +73,11 @@ namespace Pineable
                 MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
                 await info.ShowAsync();
                 //cargarDatosOffline();
+                grdErrorLastNews.Visibility = Visibility.Visible;
+                grdErrorCategories.Visibility = Visibility.Visible;
+                grdErrorNotifications.Visibility = Visibility.Visible;
+                lstvUserPosts.Visibility = Visibility.Collapsed;
+                grdErrorMyProfile.Visibility = Visibility.Visible;
             }
             
         }
@@ -240,8 +250,8 @@ namespace Pineable
                     else
                     {
                         // No internet
-                        MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
-                        await info.ShowAsync();
+                        //MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
+                        //await info.ShowAsync();
 
                     }
                     
