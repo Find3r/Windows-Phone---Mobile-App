@@ -35,6 +35,12 @@ namespace Pineable
     public sealed partial class App : Application
     {
         // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
+        public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient wantedappClient = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
+        "https://wantedapp.azure-mobile.net/",
+        "MIqlLCMyhKNIonsgsNuFlpBXzqqNWj11");
+
+
+        // http://go.microsoft.com/fwlink/?LinkId=290986&clcid=0x409
 
 
         private TransitionCollection transitions;
@@ -199,6 +205,7 @@ namespace Pineable
                 // si hay entonces se intenta actualizar el canal de push notifications
                 await Pineable.wantedappPush.UploadChannel();
             }
+
            
         }
 

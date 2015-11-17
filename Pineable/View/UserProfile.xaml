@@ -14,11 +14,11 @@
 
 
         <MenuFlyout x:Key="menu">
-
+            <!--
             <MenuFlyoutItem Text="Reportar" Background="White" Foreground="Black" Click="ReportNew" />
 
             <MenuFlyoutItem Text="Editar" Background="White" Foreground="Black" Click="EditNew"  />
-
+        -->
             <MenuFlyoutItem Text="Cancelar" Background="White" Foreground="Black"/>
 
         </MenuFlyout>
