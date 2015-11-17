@@ -358,7 +358,7 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>15959CarlosCastroBrenes.Find3r</MainPackageIdentityName>
+    <MainPackageIdentityName>15959CarlosCastroBrenes.10553D7F9869A</MainPackageIdentityName>
     <ReservedNames>
       <ReservedName>Find3r</ReservedName>
     </ReservedNames>
@@ -392,7 +392,6 @@
     <MainPackageIdentityName>15959CarlosCastroBrenes.Reporta2</MainPackageIdentityName>
     <MainPackageIdentityName>15959CarlosCastroBrenes.SistemasOperativosMicrosof</MainPackageIdentityName>
     <MainPackageIdentityName>15959CarlosCastroBrenes.TheDoorsFans</MainPackageIdentityName>
-    <MainPackageIdentityName>15959CarlosCastroBrenes.TheForgotten</MainPackageIdentityName>
     <MainPackageIdentityName>15959CarlosCastroBrenes.Tigres</MainPackageIdentityName>
     <MainPackageIdentityName>15959CarlosCastroBrenes.TraveliTico</MainPackageIdentityName>
     <MainPackageIdentityName>15959CarlosCastroBrenes.TuDeporte</MainPackageIdentityName>
@@ -400,5 +399,5 @@
     <MainPackageIdentityName>15959CarlosCastroBrenes.TuMascota</MainPackageIdentityName>
     <MainPackageIdentityName>15959CarlosCastroBrenes.Wantedh</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH1P4NV" />
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH69JG6" />
 </StoreAssociation>

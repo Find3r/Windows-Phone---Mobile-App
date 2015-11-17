@@ -245,7 +245,7 @@ namespace Pineable
                     {
                         //Wifi or Cellular
                         App.objUsuarioLogueado.Id = e.Parameter as string;
-                        loadUserInformation();
+                        await loadUserInformation();
                     }
                     else
                     {
@@ -274,7 +274,7 @@ namespace Pineable
             
         }
 
-        private async void loadUserInformation()
+        private async Task loadUserInformation()
         {
             // verificamos si no tiene nada asignado
             if (App.objUsuarioLogueado.Name == null)
@@ -288,7 +288,7 @@ namespace Pineable
                 App.objUsuarioLogueado.Name = facebookUser.Name;
                 App.objUsuarioLogueado.PictureUrl = "http://graph.facebook.com/" + facebookUser.Id + "/picture?type=large";
                 
-                if (facebookUser.PictureCoverURL.PictureUrl == null)
+                if (facebookUser.PictureCoverURL == null)
                 {
                     App.objUsuarioLogueado.CoverPicture = "https://wanted.blob.core.windows.net/img/Hakuna_Matata opacidad.jpg";
                 }
