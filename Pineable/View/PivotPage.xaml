@@ -536,6 +536,7 @@
                 <Grid>
                     <Grid.RowDefinitions >
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -552,7 +553,8 @@
                     <Grid
                         Name="grdErrorMyProfile"
                         VerticalAlignment="Center"
-                        Visibility="Collapsed">
+                        Visibility="Collapsed"
+                        Grid.Row="1">
 
                         <Grid.RowDefinitions>
                             <RowDefinition />

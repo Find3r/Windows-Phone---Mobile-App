@@ -78,6 +78,7 @@ namespace Pineable
                 grdErrorNotifications.Visibility = Visibility.Visible;
                 lstvUserPosts.Visibility = Visibility.Collapsed;
                 grdErrorMyProfile.Visibility = Visibility.Visible;
+                progressRing.IsActive = false;
             }
             
         }
@@ -243,6 +244,7 @@ namespace Pineable
                     
                     if (await App.CheckInternetConnection())
                     {
+                        progressRing.IsActive = true;
                         //Wifi or Cellular
                         App.objUsuarioLogueado.Id = e.Parameter as string;
                         await loadUserInformation();
@@ -290,7 +292,7 @@ namespace Pineable
                 
                 if (facebookUser.PictureCoverURL == null)
                 {
-                    App.objUsuarioLogueado.CoverPicture = "https://wanted.blob.core.windows.net/img/Hakuna_Matata opacidad.jpg";
+                    App.objUsuarioLogueado.CoverPicture = "http://www.solosfondi.com/wp-content/uploads/2011/05/wallpaper-hakuna-matata.jpg";
                 }
                 else
                 {
@@ -302,7 +304,7 @@ namespace Pineable
                 try
                 {
                     Usuario objUsuario = await tableUsuario.LookupAsync(App.objUsuarioLogueado.Id);
-
+                    await tableUsuario.UpdateAsync(App.objUsuarioLogueado);
                     App.objUsuarioLogueado = objUsuario;
                 }
                 catch (Exception a)
