@@ -420,5 +420,21 @@ namespace Pineable
                 throw new Exception("Failed to create initial page");
             }
         }
+
+        private async void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            if(App.SignOut())
+            {
+                if (!this.Frame.Navigate(typeof(View.Login)))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+            else
+            {
+                MessageDialog info = new MessageDialog("Error al cerrar la sesión");
+                await info.ShowAsync();
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="15959CarlosCastroBrenes.10553D7F9869A" Publisher="CN=64D74080-9716-438D-99E4-81163AC7B5A7" Version="1.1.0.1" />
+  <Identity Name="15959CarlosCastroBrenes.10553D7F9869A" Publisher="CN=64D74080-9716-438D-99E4-81163AC7B5A7" Version="1.1.0.2" />
   <mp:PhoneIdentity PhoneProductId="b457e1a7-f6e8-4637-9900-4f1a518edc1e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Find3r</DisplayName>

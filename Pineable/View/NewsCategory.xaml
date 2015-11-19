@@ -301,7 +301,7 @@
                 <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
 
             </CommandBar.PrimaryCommands>
-
+            
         </CommandBar>
 
     </Page.BottomAppBar>

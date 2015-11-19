@@ -609,6 +609,10 @@
                 
             </CommandBar.PrimaryCommands>
 
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Name="btnSignOut" x:Uid="SignOut" Label="{Binding}" Click="btnSignOut_Click"/>
+            </CommandBar.SecondaryCommands>
+
         </CommandBar>
         
     </Page.BottomAppBar>

@@ -174,7 +174,7 @@ namespace Pineable
                 // configuring the new page by passing required information as a navigation
                 // parameter.
 
-                
+                REFRESH_ITEMS = true;
 
                 // verificamos si existe la credencial almacenada
                 if (Authenticate())
@@ -244,6 +244,33 @@ namespace Pineable
             {
                 return false;
             }
+
+        }
+
+        public static bool SignOut()
+        {
+            // Use the PasswordVault to securely store and access credentials.
+            PasswordVault vault = new PasswordVault();
+            PasswordCredential credential = null;
+
+            try
+            {
+                // Try to get an existing credential from the vault.
+                credential = vault.FindAllByResource("Facebook").First();
+
+                vault.Remove(credential);
+
+                MobileService.Logout();
+                return true;
+            }
+            catch (Exception a)
+            {
+                // When there is no matching resource an error occurs, which we ignore.
+
+                return false;
+            }
+
+           
 
         }
 

@@ -135,4 +135,7 @@
   <data name="PivotItem4.Header" xml:space="preserve">
     <value>Mi Perfil</value>
   </data>
+  <data name="SignOut.Label" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
 </root>
