@@ -45,7 +45,10 @@ namespace Pineable.Model
 
         [JsonProperty(PropertyName = "longitud")]
         public string Longitude { get; set; }
-        
+
+        [JsonProperty(PropertyName = "solved")]
+        public bool? Solved { get; set; }
+
         public string DateShort
         {
             get

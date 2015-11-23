@@ -9,20 +9,20 @@ namespace Pineable.Model
 {
     public class NewCustom : Noticia
     {
-        [JsonProperty(PropertyName = "Column13")]
+        [JsonProperty(PropertyName = "nombre_usuario")]
         public string UserName { get; set; }
 
-        [JsonProperty(PropertyName = "Column14")]
+        [JsonProperty(PropertyName = "urlimagen_perfil_usuario")]
         public string UserPictureURL { get; set; }
 
-        [JsonProperty(PropertyName = "Column15")]
+        [JsonProperty(PropertyName = "nombre_provincia")]
         public string NameZone { get; set; }
 
-        [JsonProperty(PropertyName = "Column16")]
+        [JsonProperty(PropertyName = "cantidad_comentarios")]
         private int? quantityComments { get; set; }
 
-        [JsonProperty(PropertyName = "estado_seguimiento")]
-        public bool StatusFollow { get; set; }
+        [JsonProperty(PropertyName = "estado_follow")]
+        public bool ?StatusFollow { get; set; }
 
         public int QuantityComments
         {
@@ -41,10 +41,7 @@ namespace Pineable.Model
             set { quantityComments = value; }
         }
 
-
-
-
-        public string StatusPictureURL
+        public string TypePictureURL
         {
             get
             {
@@ -63,7 +60,69 @@ namespace Pineable.Model
             }
         }
 
+
+
+        public string StatusPictureURL
+        {
+            get
+            {
+                switch (IdStatus)
+                {
+                    case "0":
+                        return "ms-appx:///Assets/unsolved.png";
+
+                    case "1":
+                        return "ms-appx:///Assets/solved.png";
+
+                    default:
+                        return "";
+                }
+
+            }
+        }
+
+        public string FollowStatusPictureURL
+        {
+            get
+            {
+
+                if (StatusFollow == null)
+                {
+                    StatusFollow = false;
+                }
+
+                return ((bool)StatusFollow) ? "ms-appx:///Assets/unfollow.png" : "ms-appx:///Assets/follow.png";
+
+            }
+        }
+
         public string StatusName
+        {
+            get
+            {
+                if(Solved == null)
+                {
+                    Solved = false;
+                }
+
+                return ((bool)Solved) ? "Resuelto" : "Pendiente";
+            }
+        }
+
+        public string StatusFollowName
+        {
+            get
+            {
+                if (StatusFollow == null)
+                {
+                    StatusFollow = false;
+                }
+                
+                return ((bool)StatusFollow) ? "Descartar" : "Seguir";
+            }
+        }
+
+        public string TypeName
         {
             get
             {
@@ -71,10 +130,10 @@ namespace Pineable.Model
                 switch (IdStatus)
                 {
                     case "0":
-                        return "Desaparecido(a)";
+                        return "Perdid@";
 
                     case "1":
-                        return "Encontrado(a)";
+                        return "Encontrad@";
 
                     default:
                         return "";

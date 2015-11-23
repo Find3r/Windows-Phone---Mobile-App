@@ -95,9 +95,12 @@ namespace Pineable
             IMobileServiceTable<Notificacionusuario> notificationsTable = App.MobileService.GetTable<Notificacionusuario>();
 
             lstvUserPosts.DataContext = App.objUsuarioLogueado;
+            try
+            {
 
+           
             // se cargan las últimas noticias
-            IEnumerable<NewCustom> collectionLastNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_news",HttpMethod.Get,null);
+            IEnumerable<NewCustom> collectionLastNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("last_newsaux", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
             lstvUltimasNoticias.ItemsSource = collectionLastNews;
 
             // se cargan las categorías
@@ -109,13 +112,14 @@ namespace Pineable
             lstvNotificaciones.ItemsSource = collectionNotifications;
 
             // se cargan las noticias del usuario
-            IEnumerable<NewCustom> collectionUserNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
+            IEnumerable<NewCustom> collectionUserNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("my_news", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
             lstvUserPosts.ItemsSource = collectionUserNews;
 
             // se cargan las noticias que un usuario sigue
             IEnumerable<NewCustom> collectionUserFollowing = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("following_news", HttpMethod.Get, new Dictionary<string, string> { { "iduser", App.objUsuarioLogueado.Id } });
             lstvUserFollowingPosts.ItemsSource = collectionUserFollowing;
 
+           
             // se verifica si se tiene que desplegar el layout con el mensaje de error
 
             // últimas noticias
@@ -169,6 +173,14 @@ namespace Pineable
             }
 
             progressRing.IsActive = false;
+
+            }
+            catch (Exception aaa)
+            {
+
+
+            }
+
         }
 
         #region offline

@@ -175,6 +175,7 @@
     <Content Include="Assets\calendar.png" />
     <Content Include="Assets\car.png" />
     <Content Include="Assets\comment.png" />
+    <Content Include="Assets\follow.png" />
     <Content Include="Assets\fondo.png" />
     <Content Include="Assets\found.png" />
     <Content Include="Assets\Hawaiio.jpg" />
@@ -195,6 +196,9 @@
     <Content Include="Assets\saved_bar.png" />
     <Content Include="Assets\search_bar.png" />
     <Content Include="Assets\siren.png" />
+    <Content Include="Assets\solved.png" />
+    <Content Include="Assets\unfollow.png" />
+    <Content Include="Assets\unsolved.png" />
     <Content Include="Assets\user.png" />
     <Content Include="Assets\user_bar.png" />
     <Content Include="Common\ReadMe.txt" />
