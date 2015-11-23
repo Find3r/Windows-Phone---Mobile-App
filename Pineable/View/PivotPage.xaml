@@ -527,6 +527,7 @@
 
             </PivotItem>
 
+
             <!--Pivot item three-->
             <PivotItem
                 x:Uid="PivotItem4"
@@ -572,6 +573,62 @@
                             x:Uid="ErrorData"
                             Grid.Row="1"
                             Name="txtErrorMyProfile"
+                            FontSize="20"
+                            Foreground="#212121"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="0,20"/>
+
+                    </Grid>
+
+                </Grid>
+
+            </PivotItem>
+
+
+            <PivotItem
+                x:Uid="PivotItem5"
+                Header="Seguimiento"
+                Margin="19,14.5,19,0">
+                <!--Double line list no text wrapping-->
+
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView
+                        Name="lstvUserFollowingPosts"
+                        ItemTemplate="{StaticResource itemNoticiaPersonalizada}"
+                        IsItemClickEnabled="True"
+                        ItemClick="lstvUltimasNoticias_ItemClick"/>
+
+
+                    <Grid
+                        Name="grdErrorMyFollowing"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed"
+                        Grid.Row="1">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image 
+                            Name="imgErrorMyFollowing"
+                            Width="100"
+                            Height="100"
+                            Source="ms-appx:///Assets/sad.png" />
+
+                        <TextBlock
+                            x:Uid="ErrorData"
+                            Grid.Row="1"
+                            Name="txtErrorMyFollowing"
                             FontSize="20"
                             Foreground="#212121"
                             TextAlignment="Center"

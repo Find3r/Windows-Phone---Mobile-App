@@ -141,6 +141,9 @@
   <data name="PivotItem4.Header" xml:space="preserve">
     <value>My Profile</value>
   </data>
+  <data name="PivotItem5.Header" xml:space="preserve">
+    <value>Following</value>
+  </data>
   <data name="refresh.Label" xml:space="preserve">
     <value>Refresh</value>
   </data>

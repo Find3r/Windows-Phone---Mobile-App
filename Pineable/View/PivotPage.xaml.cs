@@ -91,9 +91,7 @@ namespace Pineable
                 culture = culture.Parent;
             var a = culture.TwoLetterISOLanguageName;
             */
-            IMobileServiceTable<Categoria> categoryTable = App.MobileService.GetTable<Categoria>();
-            
-          
+            IMobileServiceTable<Categoria> categoryTable = App.MobileService.GetTable<Categoria>();     
             IMobileServiceTable<Notificacionusuario> notificationsTable = App.MobileService.GetTable<Notificacionusuario>();
 
             lstvUserPosts.DataContext = App.objUsuarioLogueado;
@@ -113,7 +111,11 @@ namespace Pineable
             // se cargan las noticias del usuario
             IEnumerable<NewCustom> collectionUserNews = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("news_user", HttpMethod.Get, new Dictionary<string, string> { { "id", App.objUsuarioLogueado.Id } });
             lstvUserPosts.ItemsSource = collectionUserNews;
-          
+
+            // se cargan las noticias que un usuario sigue
+            IEnumerable<NewCustom> collectionUserFollowing = await App.MobileService.InvokeApiAsync<IEnumerable<NewCustom>>("following_news", HttpMethod.Get, new Dictionary<string, string> { { "iduser", App.objUsuarioLogueado.Id } });
+            lstvUserFollowingPosts.ItemsSource = collectionUserFollowing;
+
             // se verifica si se tiene que desplegar el layout con el mensaje de error
 
             // últimas noticias
@@ -154,6 +156,16 @@ namespace Pineable
             else
             {
                 grdErrorMyProfile.Visibility = Visibility.Collapsed;
+            }
+
+            // following
+            if (collectionUserFollowing.Count() == 0)
+            {
+                grdErrorMyFollowing.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                grdErrorMyFollowing.Visibility = Visibility.Collapsed;
             }
 
             progressRing.IsActive = false;
