@@ -100,6 +100,7 @@ namespace Pineable
                 // Change 'MobileService' to the name of your MobileServiceClient instance. 
                 App.MobileService.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
             }
+            
 #endif
 
             base.OnActivated(args);

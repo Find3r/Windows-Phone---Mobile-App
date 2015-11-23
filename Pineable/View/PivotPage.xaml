@@ -406,10 +406,10 @@
                             Source="ms-appx:///Assets/sad.png" />
 
                         <TextBlock
+                            x:Uid="ErrorData"
                             Grid.Row="1"
                             Name="txtErrorLastNews"
                             FontSize="20"
-                            Text="¡Vaya parece que aún no hay datos para mostrar!"
                             Foreground="#212121"
                             TextAlignment="Center"
                             TextWrapping="Wrap"
@@ -459,10 +459,10 @@
                             Source="ms-appx:///Assets/sad.png" />
 
                         <TextBlock
+                            x:Uid="ErrorData"
                             Grid.Row="1"
                             Name="txtErrorCategories"
                             FontSize="20"
-                            Text="¡Vaya parece que aún no hay datos para mostrar!"
                             Foreground="#212121"
                             TextAlignment="Center"
                             TextWrapping="Wrap"
@@ -512,10 +512,10 @@
                             Source="ms-appx:///Assets/sad.png" />
                     
                         <TextBlock
+                            x:Uid="ErrorData"
                             Grid.Row="1"
                             Name="txtErrorNotifications"
                             FontSize="20"
-                            Text="¡Vaya parece que aún no hay datos para mostrar!"
                             Foreground="#212121"
                             TextAlignment="Center"
                             TextWrapping="Wrap"
@@ -569,10 +569,10 @@
                             Source="ms-appx:///Assets/sad.png" />
 
                         <TextBlock
+                            x:Uid="ErrorData"
                             Grid.Row="1"
                             Name="txtErrorMyProfile"
                             FontSize="20"
-                            Text="¡Vaya parece que aún no hay datos para mostrar!"
                             Foreground="#212121"
                             TextAlignment="Center"
                             TextWrapping="Wrap"
@@ -604,8 +604,8 @@
 
             <CommandBar.PrimaryCommands>
 
-                <AppBarButton x:Name="btnAddNew" Label="Agregar" Icon="Add" Click="btnAddNew_Click" />
-                <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
+                <AppBarButton x:Uid="add" x:Name="btnAddNew"  Icon="Add" Click="btnAddNew_Click" />
+                <AppBarButton x:Uid="refresh" x:Name="btnRefresh"  Icon="Refresh" Click="btnRefresh_Click" />
                 
             </CommandBar.PrimaryCommands>
 

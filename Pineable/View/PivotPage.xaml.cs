@@ -36,7 +36,7 @@ namespace Pineable
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
-
+       
         NewCustom objNoticiaAux;
 
         public PivotPage()
@@ -46,7 +46,7 @@ namespace Pineable
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
-           
+            
         }
 
         private async void verificarConexion()
@@ -85,7 +85,12 @@ namespace Pineable
 
         private async void cargarDatos()
         {
-
+            /*
+            var culture = CultureInfo.CurrentCulture;
+            if (!culture.IsNeutralCulture)
+                culture = culture.Parent;
+            var a = culture.TwoLetterISOLanguageName;
+            */
             IMobileServiceTable<Categoria> categoryTable = App.MobileService.GetTable<Categoria>();
             
           
@@ -282,9 +287,18 @@ namespace Pineable
             if (App.objUsuarioLogueado.Name == null)
             {
                 App.FIRST_TIME = false;
+                FacebookUser facebookUser;
+                try
+                {
+                    // se consulta la api   
+                    facebookUser = await App.MobileService.InvokeApiAsync<FacebookUser>("userlogin", HttpMethod.Get, null);
+                }
+                catch (Exception e)
+                {
 
-                // se consulta la api   
-                FacebookUser facebookUser = await App.MobileService.InvokeApiAsync<FacebookUser>("userlogin", HttpMethod.Get, null);
+                    throw;
+                }
+               
 
                 // establecemos nuestro objeto usuario que utilizaremos
                 App.objUsuarioLogueado.Name = facebookUser.Name;

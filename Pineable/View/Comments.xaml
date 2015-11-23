@@ -123,10 +123,10 @@
                 Source="ms-appx:///Assets/sad.png" />
 
             <TextBlock
+                x:Uid="ErrorData"
                  Grid.Row="1"
                  Name="txtErrorComentarios"
                  FontSize="20"
-                 Text="¡Vaya parece que aún no hay datos para mostrar!"
                  Foreground="#212121"
                  TextAlignment="Center"
                  TextWrapping="Wrap"
@@ -142,8 +142,8 @@
             Margin="15">
 
             <TextBox 
+                x:Uid="WriteComment"
                 Name="txtComment" 
-                PlaceholderText="Escribe el comentario" 
                 BorderThickness="1" 
                 TextWrapping="Wrap" 
                 AcceptsReturn="True"
@@ -167,8 +167,8 @@
     <Page.BottomAppBar >
         <CommandBar Background="#ff80a51e">
 
-            <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
-            <AppBarButton x:Name="btnAddComment" Icon="Message" Label="Comentar" Click="btnAddComment_Click" />
+            <AppBarButton x:Uid="refresh" x:Name="btnRefresh"  Icon="Refresh" Click="btnRefresh_Click" />
+            <AppBarButton x:Uid="comment" x:Name="btnAddComment" Icon="Message"  Click="btnAddComment_Click" />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

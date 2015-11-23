@@ -199,6 +199,7 @@
     <Content Include="Assets\user_bar.png" />
     <Content Include="Common\ReadMe.txt" />
     <None Include="Package.StoreAssociation.xml" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\es-Es\Resources.resw" />
   </ItemGroup>
   <ItemGroup>

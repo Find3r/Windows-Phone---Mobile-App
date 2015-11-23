@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="add.Label" xml:space="preserve">
-    <value>Agregar</value>
+    <value>Add</value>
   </data>
   <data name="comment.Label" xml:space="preserve">
-    <value>Comentar</value>
+    <value>Comment</value>
   </data>
   <data name="ErrorConnection" xml:space="preserve">
-    <value>¡Verifique la conexión a internet!</value>
+    <value>¡Check the internet connection!</value>
   </data>
   <data name="ErrorData.Text" xml:space="preserve">
-    <value>¡Vaya parece que aún no hay datos para mostrar!</value>
+    <value>¡We don't have anything to show yet!</value>
   </data>
   <data name="PivotItem1.Header" xml:space="preserve">
-    <value>Reciente</value>
+    <value>Last</value>
   </data>
   <data name="PivotItem2.Header" xml:space="preserve">
-    <value>Categorías</value>
+    <value>Categories</value>
   </data>
   <data name="PivotItem3.Header" xml:space="preserve">
-    <value>Notificaciones</value>
+    <value>Notifications</value>
   </data>
   <data name="PivotItem4.Header" xml:space="preserve">
-    <value>Mi Perfil</value>
+    <value>My Profile</value>
   </data>
   <data name="refresh.Label" xml:space="preserve">
-    <value>Actualizar</value>
+    <value>Refresh</value>
   </data>
   <data name="SignOut.Label" xml:space="preserve">
-    <value>Cerrar sesión</value>
+    <value>Sign Out</value>
   </data>
   <data name="WriteComment.PlaceholderText" xml:space="preserve">
-    <value>Escribe el comentario</value>
+    <value>Write your comment</value>
   </data>
 </root>

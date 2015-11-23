@@ -298,7 +298,7 @@
 
             <CommandBar.PrimaryCommands>
 
-                <AppBarButton x:Name="btnRefresh" Label="Actualizar" Icon="Refresh" Click="btnRefresh_Click" />
+                <AppBarButton x:Uid="refresh" x:Name="btnRefresh"  Icon="Refresh" Click="btnRefresh_Click" />
 
             </CommandBar.PrimaryCommands>
             
