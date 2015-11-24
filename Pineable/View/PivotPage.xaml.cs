@@ -281,8 +281,8 @@ namespace Pineable
                     else
                     {
                         // No internet
-                        //MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
-                        //await info.ShowAsync();
+                        MessageDialog info = new MessageDialog("Verfique la conexión a Internet");
+                        await info.ShowAsync();
 
                     }
                     
@@ -299,8 +299,12 @@ namespace Pineable
             }
             catch (Exception a)
             {
-
-               
+                grdErrorLastNews.Visibility = Visibility.Visible;
+                grdErrorCategories.Visibility = Visibility.Visible;
+                grdErrorNotifications.Visibility = Visibility.Visible;
+                lstvUserPosts.Visibility = Visibility.Collapsed;
+                grdErrorMyProfile.Visibility = Visibility.Visible;
+                progressRing.IsActive = false;
             }
             
         }

@@ -23,7 +23,8 @@
     <!-- Declare the shared flyout as a resource. -->
     <Page.Resources>
 
-    
+     
+
 
         <MenuFlyout x:Key="menu">
             <!--
@@ -237,36 +238,32 @@
                         <Image 
                             Grid.Column="0"  
                             Source="{Binding TypePictureURL}"
-                            Width="Auto" 
-                            Height="Auto"  
-                            Margin="20,0"
+                            Width="25" 
+                            Height="25"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center" />
 
                         <Image 
                             Grid.Column="1"  
                             Source="{Binding StatusPictureURL}"
-                            Width="Auto" 
-                            Height="Auto"  
-                            Margin="20,0"
+                            Width="25" 
+                            Height="25"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center" />
 
                         <Image 
                             Grid.Column="2"  
                             Source="{Binding FollowStatusPictureURL}"
-                            Width="Auto" 
-                            Height="Auto"  
-                            Margin="20,0"
+                            Width="25" 
+                            Height="25"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
 
                         <Image 
                             Grid.Column="3"  
                             Source="ms-appx:///Assets/comment.png"
-                            Width="Auto" 
-                            Height="Auto"  
-                            Margin="20,0"
+                            Width="25" 
+                            Height="25"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Tapped="AddCommentNew" />
@@ -277,8 +274,7 @@
                             Grid.Column="0"  
                             Text="{Binding TypeName}"  
                             Foreground="#5F4C0B" 
-                            FontSize="18"  
-                            Margin="20,0"
+                            FontSize="16"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
 
@@ -287,8 +283,7 @@
                             Grid.Column="1"  
                             Text="{Binding StatusName}"  
                             Foreground="#5F4C0B" 
-                            FontSize="18"  
-                            Margin="20,0"
+                            FontSize="16"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
 
@@ -298,8 +293,7 @@
                             Grid.Column="2"  
                             Text="{Binding StatusFollowName}"  
                             Foreground="#5F4C0B" 
-                            FontSize="18"  
-                            Margin="20,0"
+                            FontSize="16"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Tapped="AddCommentNew"/>
@@ -309,8 +303,7 @@
                             Grid.Column="3"  
                             Text="{Binding QuantityComments}"  
                             Foreground="#5F4C0B" 
-                            FontSize="18"  
-                            Margin="20,0"
+                            FontSize="16"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Tapped="AddCommentNew"/>

@@ -126,9 +126,11 @@
     <Compile Include="DataModel\SampleDataSource.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Model\CustomImage.cs" />
+    <Compile Include="Model\NotificationEnabledObject.cs" />
     <Compile Include="Services\MobileServices\wantedapp\push.register.cs">
       <ConnectedServiceReference>wantedapp</ConnectedServiceReference>
     </Compile>
+    <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="View\AddNew.xaml.cs">
       <DependentUpon>AddNew.xaml</DependentUpon>
     </Compile>
@@ -241,6 +243,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

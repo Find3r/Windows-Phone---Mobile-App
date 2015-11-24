@@ -30,36 +30,63 @@ namespace Pineable.View
     public sealed partial class Login : Page
     {
         private MobileServiceUser user;
-        const string PROVIDER = "Facebook";
+        
         public Login()
         {
             this.InitializeComponent();
         }
 
-        private async System.Threading.Tasks.Task Authenticate()
+        private async System.Threading.Tasks.Task<bool> Authenticate()
         {
             string message = null;
+            bool success = false;
+
             // This sample uses the Facebook provider.
+            var PROVIDER = "Facebook";
+
 
             // Use the PasswordVault to securely store and access credentials.
             PasswordVault vault = new PasswordVault();
             PasswordCredential credential = null;
 
-            while (credential == null)
+            try
+            {
+                // Try to get an existing credential from the vault.
+                credential = vault.FindAllByResource(PROVIDER).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                // When there is no matching resource an error occurs, which we ignore.
+            }
+
+            if (credential != null)
+            {
+                // Create a user from the stored credentials.
+                user = new MobileServiceUser(credential.UserName);
+                credential.RetrievePassword();
+                user.MobileServiceAuthenticationToken = credential.Password;
+
+                // Set the user from the stored credentials.
+                App.MobileService.CurrentUser = user;
+
+                // Consider adding a check to determine if the token is 
+                // expired, as shown in this post: http://aka.ms/jww5vp.
+
+                success = true;
+            }
+            else
             {
                 try
                 {
-                    // Try to get an existing credential from the vault.
-                    credential = vault.FindAllByResource(PROVIDER).FirstOrDefault();
-                }
-                catch (Exception a)
-                {
-                    // When there is no matching resource an error occurs, which we ignore.
-                }
+                    // Login with the identity provider.
+                    user = await App.MobileService
+                        .LoginAsync(MobileServiceAuthenticationProvider.Facebook);
 
-                if (credential != null)
-                {
-                    // Create a user from the stored credentials.
+                    // Create and store the user credentials.
+                    credential = new PasswordCredential(PROVIDER,
+                        user.UserId, user.MobileServiceAuthenticationToken);
+                    vault.Add(credential);
+
                     user = new MobileServiceUser(credential.UserName);
                     credential.RetrievePassword();
                     user.MobileServiceAuthenticationToken = credential.Password;
@@ -67,48 +94,16 @@ namespace Pineable.View
                     // Set the user from the stored credentials.
                     App.MobileService.CurrentUser = user;
 
-                    try
-                    {
-                        // Try to return an item now to determine if the cached credential has expired.
-                        await App.MobileService.GetTable<Model.Categoria>().Take(1).ToListAsync();
+                    success = true;
 
-                    }
-                    catch (MobileServiceInvalidOperationException ex)
-                    {
-                        if (ex.Response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                        {
-                            // Remove the credential with the expired token.
-                            vault.Remove(credential);
-                            credential = null;
-                            continue;
-                        }
-                    }
                 }
-                else
+                catch (MobileServiceInvalidOperationException ex)
                 {
-                    try
-                    {
-                        // Login with the identity provider.
-                        user = await App.MobileService
-                            .LoginAsync(PROVIDER);
-
-                        // Create and store the user credentials.
-                        credential = new PasswordCredential(PROVIDER,
-                            user.UserId, user.MobileServiceAuthenticationToken);
-                        vault.Add(credential);
-
-                        user = new MobileServiceUser(credential.UserName);
-                        credential.RetrievePassword();
-                        user.MobileServiceAuthenticationToken = credential.Password;
-
-                        // Set the user from the stored credentials.
-                        App.MobileService.CurrentUser = user;
-                    }
-                    catch (MobileServiceInvalidOperationException ex)
-                    {
-                        message = "Debe iniciar sesión para utilizar la aplicación";
-                    }
+                    message = "Debe iniciar sesión para utilizar la aplicación";
                 }
+            }
+
+
   
                 // verificamos si existe algún mensaje para desplegar
                 if (message != null)
@@ -117,8 +112,7 @@ namespace Pineable.View
                     dialog.Commands.Add(new UICommand("OK"));
                     await dialog.ShowAsync();
                 }
-
-            }
+            return success;
 
         }
         /// <summary>
