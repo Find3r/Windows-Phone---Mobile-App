@@ -70,6 +70,7 @@ namespace Pineable.View
             OBJ_NOTICIA = e.Parameter as NewCustom;
             if (OBJ_NOTICIA != null)
             {
+                btnAgregarNoticia.Content = "Actualizar";
                 LoadNewInformation();
                 
             }
@@ -147,7 +148,7 @@ namespace Pineable.View
 
                     objNew.DateLost = dtpFecha.Date.DateTime;
                     objNew.IdCategory = (cboCategorias.SelectedIndex + 1).ToString();
-                    objNew.IdStatus = (cboTipo.SelectedIndex + 1).ToString();
+                    objNew.IdStatus = cboTipo.SelectedIndex.ToString();
                     objNew.Solved = cboEstado.SelectedIndex == 0 ? false : true;
                     
 

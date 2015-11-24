@@ -25,6 +25,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using Windows.UI;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
@@ -404,7 +405,23 @@ namespace Pineable
 
         private void OptionsNew(object sender, TappedRoutedEventArgs e)
         {
+            if (objNoticiaAux != null)
+            {
+                if(objNoticiaAux.IdUser != App.objUsuarioLogueado.Id)
+                {
+                    flyEdit.Visibility = Visibility.Collapsed;
+                    flyReport.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    flyEdit.Visibility = Visibility.Visible;
+                    flyReport.Visibility = Visibility.Collapsed;
+                }
+               
+            }
+
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+
         }
 
 

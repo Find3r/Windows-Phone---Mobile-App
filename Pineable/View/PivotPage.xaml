@@ -26,9 +26,9 @@
 
         <MenuFlyout x:Key="menu">
            
-            <MenuFlyoutItem x:Uid="ReportNew" Background="White" Foreground="Black" Click="ReportNew" />
+            <MenuFlyoutItem x:Uid="ReportNew" x:Name="flyReport" Background="White" Foreground="Black" Click="ReportNew" />
 
-            <MenuFlyoutItem x:Uid="EditNew" Background="White" Foreground="Black" Click="EditNew"  />
+            <MenuFlyoutItem x:Uid="EditNew" x:Name="flyEdit" Background="White" Foreground="Black" Click="EditNew"  />
 
 
             <MenuFlyoutItem x:Uid="CancelNew" Background="White" Foreground="Black"/>
