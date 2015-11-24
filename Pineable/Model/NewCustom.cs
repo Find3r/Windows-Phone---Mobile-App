@@ -66,18 +66,13 @@ namespace Pineable.Model
         {
             get
             {
-                switch (IdStatus)
+
+                if (Solved == null)
                 {
-                    case "0":
-                        return "ms-appx:///Assets/unsolved.png";
-
-                    case "1":
-                        return "ms-appx:///Assets/solved.png";
-
-                    default:
-                        return "";
+                    Solved = false;
                 }
 
+                return ((bool)Solved) ? "ms-appx:///Assets/solved.png" : "ms-appx:///Assets/unsolved.png";
             }
         }
 
