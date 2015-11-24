@@ -23,19 +23,18 @@
     <!-- Declare the shared flyout as a resource. -->
     <Page.Resources>
 
-     
-
 
         <MenuFlyout x:Key="menu">
-            <!--
-            <MenuFlyoutItem Text="Reportar" Background="White" Foreground="Black" Click="ReportNew" />
+           
+            <MenuFlyoutItem x:Uid="ReportNew" Background="White" Foreground="Black" Click="ReportNew" />
 
-            <MenuFlyoutItem Text="Editar" Background="White" Foreground="Black" Click="EditNew"  />
-            -->
+            <MenuFlyoutItem x:Uid="EditNew" Background="White" Foreground="Black" Click="EditNew"  />
 
-            <MenuFlyoutItem Text="Cancelar" Background="White" Foreground="Black"/>
+
+            <MenuFlyoutItem x:Uid="CancelNew" Background="White" Foreground="Black"/>
 
         </MenuFlyout>
+        
         <Thickness x:Key="PivotPortraitThemePadding">19,0,0,0</Thickness>
         <Thickness x:Key="PivotLandscapeThemePadding">19,25,0,0</Thickness>
         <Style x:Key="PivotStyle" TargetType="Pivot">
@@ -256,11 +255,13 @@
 
                         <Image 
                             Grid.Column="4"  
-                            Source="{Binding FollowStatusPictureURL}"
+                            Source="{Binding FollowStatusPictureURL,Mode=TwoWay}"
                             Width="40" 
                             Height="40"  
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"/>
+                            VerticalAlignment="Center" 
+                            Tapped="UpdateFollowNew"
+                            />
 
                         <Image 
                             Grid.Column="6"  
@@ -294,12 +295,12 @@
                         <TextBlock 
                             Grid.Row="1"
                             Grid.Column="4"  
-                            Text="{Binding StatusFollowName}"  
+                            Text="{Binding StatusFollowName,Mode=TwoWay}"  
                             Foreground="#5F4C0B" 
                             FontSize="16"  
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Tapped="AddCommentNew"/>
+                            Tapped="UpdateFollowNew"/>
 
                         <TextBlock 
                             Grid.Row="1"

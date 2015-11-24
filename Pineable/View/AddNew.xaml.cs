@@ -36,6 +36,7 @@ namespace Pineable.View
         CoreApplicationView view;
         string ImagePath;
         CustomImage customImage = new CustomImage();
+        NewCustom OBJ_NOTICIA;
 
         public AddNew()
         {
@@ -45,7 +46,16 @@ namespace Pineable.View
             cboCategorias.SelectedIndex = 0;
             cboEstado.SelectedIndex = 0;
             cboLugar.SelectedIndex = 0;
+
+            // se establece la fecha mínima
+            DateTime date = new DateTime(2000,1,1);
             
+            dtpFecha.MinYear = date;
+
+            // se establece la fecha máxima
+            dtpFecha.MaxYear = DateTime.Now;
+
+          
         }
 
         /// <summary>
@@ -55,6 +65,19 @@ namespace Pineable.View
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            OBJ_NOTICIA = e.Parameter as NewCustom;
+            if (OBJ_NOTICIA != null)
+            {
+                LoadNewInformation();
+                
+            }
+        }
+
+        private void LoadNewInformation()
+        {
+            txtNombre.Text = OBJ_NOTICIA.Name;
+            txtDescripcion.Text = OBJ_NOTICIA.Description;
+            dtpFecha.Date = OBJ_NOTICIA.DateLost;
         }
 
         private async void btnAgregarNoticia_Tapped(object sender, TappedRoutedEventArgs e)
@@ -69,6 +92,11 @@ namespace Pineable.View
                 if (String.IsNullOrEmpty(nombre) || String.IsNullOrEmpty(descripcion) || String.IsNullOrEmpty(customImage.FileName))
                 {
                     MessageDialog info = new MessageDialog("Debe completar todos los datos");
+                    await info.ShowAsync();
+                }
+                else if (dtpFecha.Date > DateTime.Now)
+                {
+                    MessageDialog info = new MessageDialog("Verifique la fecha seleccionada, no puede ser futura");
                     await info.ShowAsync();
                 }
                 else

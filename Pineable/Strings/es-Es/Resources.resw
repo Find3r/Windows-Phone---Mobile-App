@@ -153,4 +153,13 @@
   <data name="WriteComment.PlaceholderText" xml:space="preserve">
     <value>Escribe el comentario</value>
   </data>
+  <data name="CancelNew.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="EditNew.Text" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="ReportNew.Text" xml:space="preserve">
+    <value>Reportar</value>
+  </data>
 </root>

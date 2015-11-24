@@ -415,7 +415,13 @@ namespace Pineable
 
         private void EditNew(object sender, RoutedEventArgs e)
         {
-
+            if (objNoticiaAux != null)
+            {
+                if (!this.Frame.Navigate(typeof(View.AddNew), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
         }
 
         private void grdvAreas_ItemClick(object sender, ItemClickEventArgs e)
@@ -477,6 +483,19 @@ namespace Pineable
                 MessageDialog info = new MessageDialog("Error al cerrar la sesión");
                 await info.ShowAsync();
             }
+        }
+
+        private void UpdateFollowNew(object sender, TappedRoutedEventArgs e)
+        {
+            if (objNoticiaAux != null)
+            {
+                objNoticiaAux.StatusFollow = !objNoticiaAux.StatusFollow;
+
+                
+
+            }
+
+
         }
     }
 }
