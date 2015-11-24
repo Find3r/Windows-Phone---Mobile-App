@@ -232,16 +232,43 @@ namespace Pineable
 
         private void ReportNew(object sender, RoutedEventArgs e)
         {
-
+            if (objNoticiaAux != null)
+            {
+                if (!this.Frame.Navigate(typeof(View.ReportNew), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
         }
 
         private void EditNew(object sender, RoutedEventArgs e)
         {
-
+            if (objNoticiaAux != null)
+            {
+                if (!this.Frame.Navigate(typeof(View.AddNew), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
         }
 
         private void OptionsNew(object sender, TappedRoutedEventArgs e)
         {
+            if (objNoticiaAux != null)
+            {
+                if (objNoticiaAux.IdUser != App.objUsuarioLogueado.Id)
+                {
+                    flyEdit.Visibility = Visibility.Collapsed;
+                    flyReport.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    flyEdit.Visibility = Visibility.Visible;
+                    flyReport.Visibility = Visibility.Collapsed;
+                }
+
+            }
+
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
 
