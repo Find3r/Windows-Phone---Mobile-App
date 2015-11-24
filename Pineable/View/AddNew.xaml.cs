@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Pineable.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -46,6 +47,7 @@ namespace Pineable.View
             cboCategorias.SelectedIndex = 0;
             cboEstado.SelectedIndex = 0;
             cboLugar.SelectedIndex = 0;
+            cboTipo.SelectedIndex = 0;
 
             // se establece la fecha mínima
             DateTime date = new DateTime(2000,1,1);
@@ -78,6 +80,24 @@ namespace Pineable.View
             txtNombre.Text = OBJ_NOTICIA.Name;
             txtDescripcion.Text = OBJ_NOTICIA.Description;
             dtpFecha.Date = OBJ_NOTICIA.DateLost;
+
+            int idAux = 0;
+            int.TryParse(OBJ_NOTICIA.IdCategory, out idAux);
+
+            cboCategorias.SelectedIndex = idAux;
+
+            int.TryParse(OBJ_NOTICIA.IdStatus, out idAux);
+
+            cboTipo.SelectedIndex = idAux;
+
+            ObservableCollection<string> collection = new ObservableCollection<string>() {"Pendiente","Resuelto" };
+
+            cboEstado.ItemsSource = collection;
+
+            
+            cboEstado.SelectedIndex = OBJ_NOTICIA.StatusId;
+
+
         }
 
         private async void btnAgregarNoticia_Tapped(object sender, TappedRoutedEventArgs e)
@@ -88,53 +108,89 @@ namespace Pineable.View
                 string nombre = txtNombre.Text.Trim();
                 string descripcion = txtDescripcion.Text.Trim();
 
+                Noticia objNew = new Noticia();
+
+                if (OBJ_NOTICIA != null)
+                {
+                    objNew = OBJ_NOTICIA;
+                }
+
                 // verificamos que se haya ingresado los datos
-                if (String.IsNullOrEmpty(nombre) || String.IsNullOrEmpty(descripcion) || String.IsNullOrEmpty(customImage.FileName))
+                if (String.IsNullOrEmpty(nombre) || String.IsNullOrEmpty(descripcion) || String.IsNullOrEmpty(customImage.FileName) && String.IsNullOrEmpty(objNew.PictureURL))
                 {
                     MessageDialog info = new MessageDialog("Debe completar todos los datos");
                     await info.ShowAsync();
                 }
                 else if (dtpFecha.Date > DateTime.Now)
                 {
-                    MessageDialog info = new MessageDialog("Verifique la fecha seleccionada, no puede ser futura");
+                    MessageDialog info = new MessageDialog("Verifique la fecha seleccionada, no puede ser mayor a la actual");
                     await info.ShowAsync();
                 }
                 else
                 {
-                    Noticia objNew = new Noticia();
+
+
                     objNew.IdUser = App.objUsuarioLogueado.Id;
                     objNew.Name = nombre;
                     objNew.Description = descripcion;
-                    objNew.PictureURL = "https://purisinfo.blob.core.windows.net/img/" + customImage.FileName.Trim();
-                    objNew.IdZone = (cboLugar.SelectedIndex + 1).ToString();
 
-                    DateTime dateTime = dtpFecha.Date.DateTime;
-
-
-                    string format = "yyyy-MM-dd'T'HH:mm:ss";
-                    DateTime dateTimeAux;
-                    DateTime.TryParseExact(dateTime.ToString(), format, CultureInfo.InvariantCulture,
-                                                             DateTimeStyles.None, out dateTimeAux);
-
-                    objNew.DateLost = dateTimeAux;
-                    objNew.IdCategory = (cboCategorias.SelectedIndex + 1).ToString();
-                    objNew.IdStatus = "0";
-
-                    uploadImage(customImage);
-
-                    IMobileServiceTable<Noticia> newTable = App.MobileService.GetTable<Noticia>();
-                    await newTable.InsertAsync(objNew);
-
-                    MessageDialog info = new MessageDialog("Noticia agregada");
-                    await info.ShowAsync();
-
-                    // indicamos que debe actualizar
-                    App.REFRESH_ITEMS = true;
-
-                    if (!this.Frame.Navigate(typeof(PivotPage)))
+                    // si no está vacío el campo de la imagen es porque va subir una
+                    if(!String.IsNullOrEmpty(customImage.FileName))
                     {
 
+                        objNew.PictureURL = "https://purisinfo.blob.core.windows.net/img/" + customImage.FileName.Trim();
+
+                        uploadImage(customImage);
                     }
+
+                    objNew.IdZone = (cboLugar.SelectedIndex + 1).ToString();
+
+                    objNew.DateLost = dtpFecha.Date.DateTime;
+                    objNew.IdCategory = (cboCategorias.SelectedIndex + 1).ToString();
+                    objNew.IdStatus = (cboTipo.SelectedIndex + 1).ToString();
+                    objNew.Solved = cboEstado.SelectedIndex == 0 ? false : true;
+                    
+
+                    IMobileServiceTable<Noticia> newTable = App.MobileService.GetTable<Noticia>();
+
+                    string mensaje = "";
+                    bool error = false;
+
+                    try
+                    {
+                        // verificamos si se debe insertar
+                        if (OBJ_NOTICIA == null)
+                        {
+                            await newTable.InsertAsync(objNew);
+                            mensaje = "Noticia agregada";
+                        }
+                        else
+                        {
+                            await newTable.UpdateAsync(objNew);
+                            mensaje = "Noticia actualizada";
+                        }
+
+                    }
+                    catch (Exception ea)
+                    {
+                        mensaje = "Error al procesar la acción";
+                        error = true;
+                    }
+
+                    MessageDialog info = new MessageDialog(mensaje);
+                    await info.ShowAsync();
+
+                    if(!error)
+                    {
+                        // indicamos que debe actualizar
+                        App.REFRESH_ITEMS = true;
+
+                        if (!this.Frame.Navigate(typeof(PivotPage)))
+                        {
+
+                        }
+                    }
+                   
                 }
             }
             else

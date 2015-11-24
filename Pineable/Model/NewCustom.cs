@@ -111,6 +111,19 @@ namespace Pineable.Model
             }
         }
 
+        public int StatusId
+        {
+            get
+            {
+                if (Solved == null)
+                {
+                    Solved = false;
+                }
+
+                return ((bool)Solved) ? 1 : 0;
+            }
+        }
+
         public string StatusFollowName
         {
             get

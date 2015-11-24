@@ -124,6 +124,24 @@
             </ComboBox>
 
             <TextBlock      
+                Text="Tipo" 
+                FontSize="18"
+                FontWeight="Bold" 
+                Foreground="#f7931e"
+                FontFamily="Segoe UI Black"
+                Padding="10"/>
+
+            <ComboBox 
+                x:Name="cboTipo" 
+                Grid.Row="4" 
+                Background="#ff80a51e"
+                Width="{Binding ActualWidth, ElementName=grid}"
+                Margin="10,0">
+                <ComboBoxItem Content="Desaparecid@" />
+                <ComboBoxItem Content="Encontrad@"/>
+            </ComboBox>
+
+            <TextBlock      
                 Text="Estado" 
                 FontSize="18"
                 FontWeight="Bold" 
@@ -137,8 +155,7 @@
                 Background="#ff80a51e"
                 Width="{Binding ActualWidth, ElementName=grid}"
                 Margin="10,0">
-                <ComboBoxItem Content="Desaparecid@" />
-                <ComboBoxItem Content="Encontrad@"/>
+                <ComboBoxItem Content="Pendiente" />
             </ComboBox>
 
             <Button
