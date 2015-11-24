@@ -1,16 +1,24 @@
-﻿using Pineable.Model;
+﻿using Pineable.API;
+using Pineable.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pineable
+namespace Pineable.ViewModel
 {
     public class NewsViewModel : NotificationEnabledObject
     {
-        private ObservableCollection<NewCustom> _collectionLastNews { get; set; }
+        private static ObservableCollection<NewCustom> _collectionLastNews { get; set; }
+        APIConnection apiConnection;
+
+        public  NewsViewModel()
+        {
+        }
+
 
         public ObservableCollection<NewCustom> CollectionLastNews
         {
@@ -24,7 +32,7 @@ namespace Pineable
                 // esto es para agregar elementos y tener blendability, si se está en tiempo de diseño entonces se muestren datos de ejemplo
                 if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 {
-                    string descripcion = "Bacon ipsum dolor amet swine ham hock drumstick tail. Meatloaf jowl andouille jerky salami pork belly alcatra frankfurter prosciutto kevin.Tongue corned beef kielbasa salami t-bone, rump shoulder meatball pork loin cupim. Andouille ham flank pork shankle ham hock short loin rump salami tenderloin biltong." +
+                   string descripcion = "Bacon ipsum dolor amet swine ham hock drumstick tail. Meatloaf jowl andouille jerky salami pork belly alcatra frankfurter prosciutto kevin.Tongue corned beef kielbasa salami t-bone, rump shoulder meatball pork loin cupim. Andouille ham flank pork shankle ham hock short loin rump salami tenderloin biltong." +
 
 "Frankfurter andouille biltong ball tip filet mignon, sirloin turducken swine t-bone shank pork chop pastrami. Shoulder porchetta tenderloin brisket, beef ribs turkey ham pork flank alcatra ground round. Doner meatball kevin swine t - bone cupim picanha. Strip steak filet mignon ribeye, fatback pig rump pancetta. Chicken capicola drumstick doner rump tail frankfurter jowl turducken swine pastrami sausage t - bone alcatra.Capicola short loin biltong picanha doner hamburger shoulder jerky meatloaf short ribs. Boudin pork belly alcatra strip steak salami ball tip ham hock pork chop drumstick sirloin t-bone.";
 
@@ -45,6 +53,7 @@ namespace Pineable
 
                     }
                 }
+             
 
                 return _collectionLastNews;
             }
@@ -54,6 +63,8 @@ namespace Pineable
                 OnPropertyChanged();
             }
         }
+
+    
     }
 
 }

@@ -8,7 +8,7 @@
     xmlns:data="using:Pineable.Data"
     xmlns:localaux="clr-namespace:Pineable"
     mc:Ignorable="d"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+   
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Transitions>
         <TransitionCollection>
@@ -27,10 +27,7 @@
         <MenuFlyout x:Key="menu">
            
             <MenuFlyoutItem x:Uid="ReportNew" x:Name="flyReport" Background="White" Foreground="Black" Click="ReportNew" />
-
             <MenuFlyoutItem x:Uid="EditNew" x:Name="flyEdit" Background="White" Foreground="Black" Click="EditNew"  />
-
-
             <MenuFlyoutItem x:Uid="CancelNew" Background="White" Foreground="Black"/>
 
         </MenuFlyout>
@@ -393,6 +390,8 @@
 
     </Page.Resources>
 
+
+
     <Grid
         Background="#e8e8e8">
 
@@ -434,6 +433,8 @@
                         IsItemClickEnabled="True"
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True"
                         ItemClick="lstvUltimasNoticias_ItemClick"
+                        ItemsSource="{Binding Mode=TwoWay}"
+                        
                         ItemTemplate="{StaticResource itemNoticiaPersonalizada}" />
 
                     <Grid

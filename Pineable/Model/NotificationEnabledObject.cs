@@ -17,6 +17,7 @@ namespace Pineable.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(pAtributo));
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

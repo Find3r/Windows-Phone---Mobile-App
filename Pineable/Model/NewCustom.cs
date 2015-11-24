@@ -22,7 +22,30 @@ namespace Pineable.Model
         private int? quantityComments { get; set; }
 
         [JsonProperty(PropertyName = "estado_follow")]
-        public bool ?StatusFollow { get; set; }
+        //public bool ?StatusFollow { get; set; }
+        private bool? statusFollow;
+
+        public bool StatusFollow
+        {
+            get {
+
+                if (statusFollow == null)
+                {
+                    statusFollow = false;
+                }
+
+                return (bool) statusFollow;
+            }
+            set
+            {
+                statusFollow = value;
+                OnPropertyChanged();
+                OnPropertyChanged("FollowStatusPictureURL");
+                OnPropertyChanged("StatusFollowName");
+                
+            }
+        }
+
 
         public int QuantityComments
         {
@@ -81,22 +104,19 @@ namespace Pineable.Model
             get
             {
 
-                if (StatusFollow == null)
+                if (statusFollow == null)
                 {
-                    StatusFollow = false;
+                    statusFollow = false;
                 }
 
-                return ((bool)StatusFollow) ? "ms-appx:///Assets/unfollow.png" : "ms-appx:///Assets/follow.png";
+                return ((bool)statusFollow) ? "ms-appx:///Assets/unfollow.png" : "ms-appx:///Assets/follow.png";
 
             }
+            set
+            {
+                OnPropertyChanged();
+            }
         }
-
-
-      
-
-
-
-
 
         public string StatusName
         {
@@ -128,12 +148,12 @@ namespace Pineable.Model
         {
             get
             {
-                if (StatusFollow == null)
+                if (statusFollow == null)
                 {
-                    StatusFollow = false;
+                    statusFollow = false;
                 }
                 
-                return ((bool)StatusFollow) ? "Descartar" : "Seguir";
+                return ((bool)statusFollow) ? "Descartar" : "Seguir";
             }
         }
 
