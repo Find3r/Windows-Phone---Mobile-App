@@ -427,7 +427,13 @@ namespace Pineable
 
         private void ReportNew(object sender, RoutedEventArgs e)
         {
-            var a = objNoticiaAux;
+            if (objNoticiaAux != null)
+            {
+                if (!this.Frame.Navigate(typeof(View.ReportNew), objNoticiaAux))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
         }
 
         private void EditNew(object sender, RoutedEventArgs e)

@@ -110,6 +110,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ReportNew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +131,7 @@
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Model\CustomImage.cs" />
     <Compile Include="Model\NotificationEnabledObject.cs" />
+    <Compile Include="Model\Report.cs" />
     <Compile Include="Services\MobileServices\wantedapp\push.register.cs">
       <ConnectedServiceReference>wantedapp</ConnectedServiceReference>
     </Compile>
@@ -162,6 +167,9 @@
       <DependentUpon>PivotPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ReportNew.xaml.cs">
+      <DependentUpon>ReportNew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserProfile.xaml.cs">
       <DependentUpon>UserProfile.xaml</DependentUpon>
     </Compile>

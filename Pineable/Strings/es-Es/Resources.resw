@@ -162,4 +162,13 @@
   <data name="ReportNew.Text" xml:space="preserve">
     <value>Reportar</value>
   </data>
+  <data name="btnReport.Content" xml:space="preserve">
+    <value>Reportar</value>
+  </data>
+  <data name="lblReport.Text" xml:space="preserve">
+    <value>Coméntenos el problema</value>
+  </data>
+  <data name="txtReport.PlaceholderText" xml:space="preserve">
+    <value>Escriba su comentario</value>
+  </data>
 </root>
