@@ -137,7 +137,7 @@
     <Compile Include="Services\MobileServices\wantedapp\push.register.cs">
       <ConnectedServiceReference>wantedapp</ConnectedServiceReference>
     </Compile>
-    <Compile Include="ViewModel\NewsViewModel.cs" />
+    <Compile Include="ViewModel\PostViewModel.cs" />
     <Compile Include="View\AddNew.xaml.cs">
       <DependentUpon>AddNew.xaml</DependentUpon>
     </Compile>

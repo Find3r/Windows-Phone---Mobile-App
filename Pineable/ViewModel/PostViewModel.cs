@@ -10,23 +10,32 @@ using System.Threading.Tasks;
 
 namespace Pineable.ViewModel
 {
-    public class NewsViewModel : NotificationEnabledObject
+    public class PostViewModel : NotificationEnabledObject
     {
-        private static ObservableCollection<NewCustom> _collectionLastNews { get; set; }
-        APIConnection apiConnection;
+        private ObservableCollection<NewCustom> _collectionPosts = new ObservableCollection<NewCustom>();
 
-        public  NewsViewModel()
+        public  PostViewModel()
         {
+            _collectionPosts = new ObservableCollection<NewCustom>();
+            _collectionPosts.CollectionChanged += (sender, e) =>
+            {
+                OnPropertyChanged();
+            };
+
         }
 
+        private void _collectionPosts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged();
+        }
 
-        public ObservableCollection<NewCustom> CollectionLastNews
+        public ObservableCollection<NewCustom> CollectionPosts
         {
             get
             {
-                if (_collectionLastNews == null)
+                if (_collectionPosts == null)
                 {
-                    _collectionLastNews = new ObservableCollection<NewCustom>();
+                    _collectionPosts = new ObservableCollection<NewCustom>();
                 }
 
                 // esto es para agregar elementos y tener blendability, si se está en tiempo de diseño entonces se muestren datos de ejemplo
@@ -49,17 +58,18 @@ namespace Pineable.ViewModel
                             estado = 1;
                         }
 
-                        _collectionLastNews.Add(new NewCustom() { Id = "1", PictureURL = "ms-appx:///Assets/alm.png", Description = descripcion, DateLost = DateTime.Now, IdCategory = "1", IdStatus = estado.ToString(), IdZone = "1", IdUser = "1", Name = "Noticia " + i.ToString(), NameZone = "Puriscal", QuantityComments = i, UserName = i.ToString(), UserPictureURL = "ms-appx:///Assets/user.png" });
+                        _collectionPosts.Add(new NewCustom() { Id = "1", PictureURL = "ms-appx:///Assets/alm.png", Description = descripcion, DateLost = DateTime.Now, IdCategory = "1", IdStatus = estado.ToString(), IdZone = "1", IdUser = "1", Name = "Noticia " + i.ToString(), NameZone = "Puriscal", QuantityComments = i, UserName = i.ToString(), UserPictureURL = "ms-appx:///Assets/user.png" });
 
                     }
                 }
              
 
-                return _collectionLastNews;
+                return _collectionPosts;
             }
             set
             {
-                _collectionLastNews = value;
+                
+                _collectionPosts = value;
                 OnPropertyChanged();
             }
         }

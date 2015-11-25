@@ -9,7 +9,7 @@
 
     <Application.Resources>
 
-        <vm:NewsViewModel x:Key="NewsViewModel"  />
+        <vm:PostViewModel x:Key="NewsViewModel"  />
 
         <DataTemplate
             x:Key="itemNoticiaCompleta">

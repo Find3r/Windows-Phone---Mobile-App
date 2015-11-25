@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace Pineable.Model
 {
     public class Noticia : NotificationEnabledObject
+
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
@@ -21,6 +23,9 @@ namespace Pineable.Model
 
         [JsonProperty(PropertyName = "urlimagen")]
         public string PictureURL { get; set; }
+
+        [JsonProperty(PropertyName = "__createdAt")]
+        public DateTime __createdAt { get; set; }
 
         [JsonProperty(PropertyName = "fechadesaparicion")]
         public DateTime DateLost { get; set; }
@@ -72,6 +77,7 @@ namespace Pineable.Model
             }
             set { quantityReports = value; }
         }
+
 
     }
 }

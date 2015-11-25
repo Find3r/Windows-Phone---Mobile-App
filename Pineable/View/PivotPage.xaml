@@ -318,6 +318,7 @@
         </DataTemplate>
 
         <DataTemplate
+            
             x:Key="itemHeaderPerfil">
 
             <Grid
@@ -431,7 +432,6 @@
                     <ListView
                         Name="lstvUltimasNoticias"
                         IsItemClickEnabled="True"
-                        ContinuumNavigationTransitionInfo.ExitElementContainer="True"
                         ItemClick="lstvUltimasNoticias_ItemClick"
                         ItemsSource="{Binding Mode=TwoWay}"
                         
@@ -597,6 +597,7 @@
                         HeaderTemplate="{StaticResource itemHeaderPerfil}"
                         ItemTemplate="{StaticResource itemNoticiaPersonalizada}"
                         IsItemClickEnabled="True"
+                        ItemsSource="{Binding Mode=TwoWay}"
                         ItemClick="lstvUltimasNoticias_ItemClick"/>
 
 
@@ -643,7 +644,6 @@
                 <Grid>
                     <Grid.RowDefinitions >
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -653,14 +653,14 @@
                         Name="lstvUserFollowingPosts"
                         ItemTemplate="{StaticResource itemNoticiaPersonalizada}"
                         IsItemClickEnabled="True"
+                        ItemsSource="{Binding Mode=TwoWay}"
                         ItemClick="lstvUltimasNoticias_ItemClick"/>
 
 
                     <Grid
                         Name="grdErrorMyFollowing"
                         VerticalAlignment="Center"
-                        Visibility="Collapsed"
-                        Grid.Row="1">
+                        Visibility="Collapsed">
 
                         <Grid.RowDefinitions>
                             <RowDefinition />

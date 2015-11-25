@@ -29,8 +29,11 @@ namespace Pineable
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
        
         NewCustom objNoticiaAux;
-        NewsViewModel viewModel = new NewsViewModel();
+        PostViewModel viewModelLastPosts = new PostViewModel();
+        PostViewModel viewModelMyPosts = new PostViewModel();
+        PostViewModel viewModelMyFollowingPosts = new PostViewModel();
         APIConnection apiConnection = new APIConnection();
+        
 
         public PivotPage()
         {
@@ -39,7 +42,10 @@ namespace Pineable
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
+
             
+
+
         }
 
         private async void verificarConexion()
@@ -54,8 +60,6 @@ namespace Pineable
                 grdErrorMyProfile.Visibility = Visibility.Collapsed;
                 //Hay conexión a Internet
                 progressRing.IsActive = true;
-                lstvUserPosts.ItemsSource = null;
-                lstvUltimasNoticias.ItemsSource = null;
 
                 cargarDatos();
                 
@@ -80,21 +84,23 @@ namespace Pineable
                 culture = culture.Parent;
             var a = culture.TwoLetterISOLanguageName;
             */
-           
-           
-            IEnumerable<Categoria> collectionCategories = new ObservableCollection<Categoria>();
-            IEnumerable<Notificacionusuario> collectionNotifications = new ObservableCollection<Notificacionusuario>();
-            IEnumerable<NewCustom> collectionUserNews = new ObservableCollection<NewCustom>();
-            IEnumerable<NewCustom> collectionUserFollowing = new ObservableCollection<NewCustom>();
+
+            ObservableCollection<Categoria> collectionCategories = new ObservableCollection<Categoria>();
+            ObservableCollection<Notificacionusuario> collectionNotifications = new ObservableCollection<Notificacionusuario>();
 
             lstvUserPosts.DataContext = App.objUsuarioLogueado;
+
+            viewModelLastPosts.CollectionPosts = new ObservableCollection<NewCustom>();
+            viewModelMyPosts.CollectionPosts = new ObservableCollection<NewCustom>();
+            viewModelMyFollowingPosts.CollectionPosts = new ObservableCollection<NewCustom>();
+
             try
             {
-
+                
                 // se cargan las últimas noticias
-                viewModel.CollectionLastNews = await apiConnection.GETLastNews();               
-                lstvUltimasNoticias.DataContext = viewModel.CollectionLastNews;
-
+                viewModelLastPosts.CollectionPosts = await apiConnection.GETLastNews();               
+                lstvUltimasNoticias.DataContext = viewModelLastPosts.CollectionPosts;
+                
                 // se cargan las categorías
                 collectionCategories = await apiConnection.GETCategories();
                 grdvAreas.ItemsSource = collectionCategories;
@@ -104,13 +110,15 @@ namespace Pineable
                 lstvNotificaciones.ItemsSource = collectionNotifications;
 
                 // se cargan las noticias del usuario
-                collectionUserNews = await apiConnection.GETMyPosts();
-                lstvUserPosts.ItemsSource = collectionUserNews;
+                viewModelMyPosts.CollectionPosts = await apiConnection.GETMyPosts();
+                lstvUserPosts.ItemsSource = viewModelMyPosts.CollectionPosts;
 
                 // se cargan las noticias que un usuario sigue
-                collectionUserFollowing = await apiConnection.GETMyFollowingPosts();
-                lstvUserFollowingPosts.ItemsSource = collectionUserFollowing;       
-        
+                viewModelMyFollowingPosts.CollectionPosts = await apiConnection.GETMyFollowingPosts();
+                lstvUserFollowingPosts.DataContext = viewModelMyFollowingPosts.CollectionPosts;
+            
+
+
             }
             catch (Exception aaa)
             {
@@ -122,7 +130,7 @@ namespace Pineable
             // se verifica si se tiene que desplegar el layout con el mensaje de error
 
             // últimas noticias
-            if (viewModel.CollectionLastNews.Count() == 0)
+            if (viewModelLastPosts.CollectionPosts.Count() == 0)
             {
                 grdErrorLastNews.Visibility = Visibility.Visible;
             }
@@ -130,7 +138,7 @@ namespace Pineable
             {
                 grdErrorLastNews.Visibility = Visibility.Collapsed;
             }
-
+            
             // categorías
             if (collectionCategories.Count() == 0)
             {
@@ -152,7 +160,7 @@ namespace Pineable
             }
 
             // mi perfil
-            if (collectionUserNews.Count() == 0)
+            if (viewModelMyPosts.CollectionPosts.Count() == 0)
             {
                 grdErrorMyProfile.Visibility = Visibility.Visible;
             }
@@ -162,7 +170,7 @@ namespace Pineable
             }
 
             // following
-            if (collectionUserFollowing.Count() == 0)
+            if (viewModelMyFollowingPosts.CollectionPosts.Count() == 0)
             {
                 grdErrorMyFollowing.Visibility = Visibility.Visible;
             }
@@ -170,6 +178,7 @@ namespace Pineable
             {
                 grdErrorMyFollowing.Visibility = Visibility.Collapsed;
             }
+             
             #endregion
 
             progressRing.IsActive = false;
@@ -505,24 +514,68 @@ namespace Pineable
             }
         }
 
-        private void UpdateFollowNew(object sender, TappedRoutedEventArgs e)
+        private async void UpdateFollowNew(object sender, TappedRoutedEventArgs e)
         {
             if (objNoticiaAux != null)
             {
 
                 // se niega el estado actual
                 objNoticiaAux.StatusFollow = !objNoticiaAux.StatusFollow;
+                
+                try
+                {
+                    NewCustom objNoticia = new NewCustom();
 
-                // actualizamos el registro de la lista
-                viewModel.CollectionLastNews.Where(ea => ea.Id == objNoticiaAux.Id).First().StatusFollow = objNoticiaAux.StatusFollow;
+                    objNoticia = viewModelLastPosts.CollectionPosts.Where(ea => ea.Id == objNoticiaAux.Id).FirstOrDefault();
 
+                    if (objNoticia != null)
+                    {
+                        // actualizamos el registro de la lista
+                        viewModelLastPosts.CollectionPosts.Where(ea => ea.Id == objNoticiaAux.Id).FirstOrDefault().StatusFollow = objNoticiaAux.StatusFollow;
+                    }
+
+                    objNoticia = viewModelMyPosts.CollectionPosts.Where(ea => ea.Id == objNoticiaAux.Id).FirstOrDefault();
+
+                    if (objNoticia != null)
+                    {
+                        // actualizamos el registro de la lista
+                        viewModelMyPosts.CollectionPosts.Where(ea => ea.Id == objNoticiaAux.Id).FirstOrDefault().StatusFollow = objNoticiaAux.StatusFollow;
+                    }
+
+                    objNoticia = viewModelMyFollowingPosts.CollectionPosts.Where(ea => ea.Id == objNoticiaAux.Id).FirstOrDefault();
+
+                    if (objNoticia != null)
+                    {
+                        // viewModelMyFollowingPosts el registro de la lista
+                        viewModelMyFollowingPosts.CollectionPosts.Where(ea => ea.Id == objNoticiaAux.Id).FirstOrDefault().StatusFollow = objNoticiaAux.StatusFollow;
+                        viewModelMyFollowingPosts.CollectionPosts.Remove(objNoticia);
+
+                    }
+                    else
+                    {
+                        viewModelMyFollowingPosts.CollectionPosts.Add(objNoticiaAux);
+                    }
+                  
+                    viewModelMyFollowingPosts.CollectionPosts = new ObservableCollection<NewCustom>(viewModelMyFollowingPosts.CollectionPosts.OrderBy(a => a.__createdAt));
+                    lstvUserFollowingPosts.DataContext = viewModelMyFollowingPosts.CollectionPosts;
+
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+               
                 // se actualiza el registro
                 apiConnection.PUTPost(objNoticiaAux);
 
                 //verificarConexion();
-             
+                //progressRing.IsActive = true;
+                //verificarConexion();
             }
 
         }
+
+     
     }
 }

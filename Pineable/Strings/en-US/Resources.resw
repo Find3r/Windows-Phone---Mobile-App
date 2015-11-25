@@ -171,4 +171,37 @@
   <data name="txtReport.PlaceholderText" xml:space="preserve">
     <value>Write your comment</value>
   </data>
+  <data name="btnAddPost.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>Choose the category</value>
+  </data>
+  <data name="lblChooseImage.Text" xml:space="preserve">
+    <value>Choose an image</value>
+  </data>
+  <data name="lblDate.Text" xml:space="preserve">
+    <value>Choose the date</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>Report name</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Choose the status</value>
+  </data>
+  <data name="lblType.Text" xml:space="preserve">
+    <value>Choose the type</value>
+  </data>
+  <data name="lblZone.Text" xml:space="preserve">
+    <value>Choose the place</value>
+  </data>
+  <data name="txtDescripcion.PlaceholderText" xml:space="preserve">
+    <value>Write the description</value>
+  </data>
+  <data name="txtNombre.PlaceholderText" xml:space="preserve">
+    <value>Write the name</value>
+  </data>
 </root>

@@ -47,7 +47,7 @@ namespace Pineable.API
         }
 
         // actualiza una noticia
-        public async void PUTPost(NewCustom pNoticia)
+        public void PUTPost(NewCustom pNoticia)
         {
             try
             {
